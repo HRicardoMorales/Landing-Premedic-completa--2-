@@ -1,0 +1,10 @@
+{
+  "name": "landing-premedic",
+  "version": "1.0.0",
+  "description": "Landing Premedic",
+  "scripts": {
+    "dev": "node serve.js",
+    "start": "node serve.js"
+  }
+}
+

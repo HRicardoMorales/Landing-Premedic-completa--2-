@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Premedic · Agencia Comercial Oficial | Cotizá tu plan</title>
+<meta name="description" content="Cambiá tu obra social y accedé a Premedic: amplia red de clínicas, centros propios y médico online 24 hs. Cotizá tu plan por WhatsApp.">
+<meta property="og:title" content="Premedic · Cotizá tu plan por WhatsApp">
+<meta property="og:description" content="Cobertura médica con amplia red de clínicas y centros propios, para vos y tu familia.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_AR">
+<meta property="og:image" content="assets/og-premedic.webp">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#FFFFFF;color:#077B7A;font-family:'Satoshi',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#10A6A4}
+a:hover{color:#005857}
+:focus-visible{outline:3px solid #005857;outline-offset:3px;border-radius:6px}
+[data-drag]::-webkit-scrollbar{display:none}
+section[id]{scroll-margin-top:84px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition-duration:.01ms !important}[data-pm-pulse]{animation:none !important}}
+@keyframes pmPulse{0%,100%{opacity:1}50%{opacity:.45}}
+html[data-pm-boot] [data-enter]{opacity:0 !important}
+.pm-logo-header{height:44px;width:auto;aspect-ratio:255/47;max-width:100%;display:block;object-fit:contain}
+@media (max-width:767px){.pm-logo-header{height:36px}}
+.pm-logo-footer{height:56px;width:auto;aspect-ratio:255/47;max-width:100%;display:block;object-fit:contain}
+@media (max-width:767px){.pm-logo-footer{height:44px}}
+.pm-modal-overlay{position:fixed;inset:0;z-index:100;background:rgba(0,60,60,.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px;animation:pmFadeIn .2s ease-out}
+.pm-modal-card{background:#FFFFFF;border-radius:20px;max-width:560px;width:100%;padding:32px;box-shadow:0 20px 40px rgba(0,0,0,.15);position:relative;max-height:90vh;overflow-y:auto;display:flex;flex-direction:column;gap:18px;animation:pmScaleIn .2s ease-out}
+@media (max-width:767px){
+  .pm-modal-overlay{align-items:flex-end;padding:0}
+  .pm-modal-card{max-width:100%;border-radius:20px 20px 0 0;padding:24px 20px calc(24px + env(safe-area-inset-bottom, 0px));max-height:88dvh;animation:pmSlideUp .25s cubic-bezier(.22,1,.36,1)}
+}
+@keyframes pmFadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pmScaleIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+@keyframes pmSlideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@media (prefers-reduced-motion: reduce){.pm-modal-overlay,.pm-modal-card{animation:none !important}}
+</style>
+</helmet>
+
+<div data-pm-loader="" aria-hidden="true" style="position:fixed;inset:0;z-index:9999;background:#EFF8F8;display:flex;align-items:center;justify-content:center">
+  <div data-pm-pulse="" style="animation:pmPulse 1.2s ease-in-out infinite;display:flex;align-items:center;justify-content:center">
+    <sc-if value="{{ hasLogo }}" hint-placeholder-val="{{ false }}"><img src="{{ logoSrc }}" alt="Premedic" width="304" height="56" style="height:56px;width:auto;aspect-ratio:255/47;display:block;object-fit:contain"></sc-if>
+    <sc-if value="{{ noLogo }}" hint-placeholder-val="{{ true }}"><span style="font-size:44px;font-weight:700;letter-spacing:-0.035em;line-height:1;color:#10A6A4">premedic</span></sc-if>
+  </div>
+</div>
+
+<header data-enter="fade" style="position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #EBEBEB">
+  <div style="max-width:1430px;margin:0 auto;padding:0 clamp(16px,5.2vw,75px);height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="#inicio" aria-label="Premedic, ir al inicio" style="display:flex;align-items:center;gap:8px;text-decoration:none;min-width:0;flex-shrink:0">
+      <sc-if value="{{ hasLogo }}" hint-placeholder-val="{{ false }}"><img src="{{ logoSrc }}" alt="Premedic" width="239" height="44" class="pm-logo-header" style="height:{{ logoHeaderH }};width:auto;aspect-ratio:255/47;display:block;object-fit:contain"></sc-if><sc-if value="{{ noLogo }}" hint-placeholder-val="{{ true }}"><span style="font-weight:700;font-size:26px;letter-spacing:-0.04em;color:#10A6A4">premedic</span>
+      <sc-if value="{{ showPlaceholderLabels }}"><span style="font-family:ui-monospace,Menlo,monospace;font-size:9px;color:#7A8A8A;border:1px dashed #A3C9C8;border-radius:6px;padding:2px 5px">{{ L.logo }}</span></sc-if></sc-if>
+    </a>
+    <sc-if value="{{ navDesk }}" hint-placeholder-val="{{ true }}">
+      <nav aria-label="Principal" style="display:flex;align-items:center;gap:36px">
+        <a href="#planes" style="color:#077B7A;text-decoration:none;font-size:16px;font-weight:500">Planes</a>
+        <a href="#beneficios" style="color:#077B7A;text-decoration:none;font-size:16px;font-weight:500">Beneficios</a>
+        <a href="#prestadores" style="color:#077B7A;text-decoration:none;font-size:16px;font-weight:500">Prestadores</a>
+        <a href="#preguntas" style="color:#077B7A;text-decoration:none;font-size:16px;font-weight:500">Preguntas</a>
+      </nav>
+      <a href="{{ waGeneral }}" target="_blank" rel="noopener" onClick="{{ trkHeader }}" style="display:inline-flex;align-items:center;background:#10A6A4;color:#FFFFFF;font-weight:700;font-size:16px;padding:12px 22px;border-radius:15px;text-decoration:none;transition:transform .3s ease,box-shadow .3s ease" style-hover="transform:translateY(-2px);box-shadow:0 2px 4px rgba(0,0,0,.04);color:#FFFFFF">Cotizar plan</a>
+    </sc-if>
+    <sc-if value="{{ navMob }}" hint-placeholder-val="{{ false }}">
+      <button type="button" aria-label="Abrir menú" aria-expanded="{{ menuExpanded }}" onClick="{{ toggleMenu }}" style="width:46px;height:46px;border-radius:15px;border:1px solid #EBEBEB;background:#FFFFFF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;padding:0">
+        <span style="width:20px;height:2px;border-radius:2px;background:#077B7A"></span>
+        <span style="width:20px;height:2px;border-radius:2px;background:#077B7A"></span>
+        <span style="width:20px;height:2px;border-radius:2px;background:#077B7A"></span>
+      </button>
+    </sc-if>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav aria-label="Menú móvil" style="border-top:1px solid #EBEBEB;background:#FFFFFF;padding:12px 16px 20px;display:flex;flex-direction:column;gap:4px">
+      <a href="#planes" onClick="{{ closeMenu }}" style="color:#077B7A;text-decoration:none;font-size:20px;font-weight:500;padding:14px 4px;border-bottom:1px solid #EBEBEB">Planes</a>
+      <a href="#beneficios" onClick="{{ closeMenu }}" style="color:#077B7A;text-decoration:none;font-size:20px;font-weight:500;padding:14px 4px;border-bottom:1px solid #EBEBEB">Beneficios</a>
+      <a href="#prestadores" onClick="{{ closeMenu }}" style="color:#077B7A;text-decoration:none;font-size:20px;font-weight:500;padding:14px 4px;border-bottom:1px solid #EBEBEB">Prestadores</a>
+      <a href="#preguntas" onClick="{{ closeMenu }}" style="color:#077B7A;text-decoration:none;font-size:20px;font-weight:500;padding:14px 4px">Preguntas</a>
+      <a href="{{ waGeneral }}" target="_blank" rel="noopener" onClick="{{ trkMenu }}" style="margin-top:10px;display:flex;justify-content:center;background:#10A6A4;color:#FFFFFF;font-weight:700;font-size:18px;padding:14px 26px;border-radius:15px;text-decoration:none">Cotizar plan</a>
+    </nav>
+  </sc-if>
+</header>
+
+<main data-enter="move">
+<section id="inicio" ref="{{ heroRef }}" style="background:linear-gradient(180deg,#EFF8F8 0%,#FFFFFF 100%);padding:104px 0 40px;overflow:hidden">
+  <div style="max-width:1430px;margin:0 auto;padding:0 clamp(16px,5.2vw,75px)">
+    <sc-if value="{{ heroDesk }}" hint-placeholder-val="{{ true }}">
+      <div style="position:relative;height:640px">
+        <div data-reveal="" style="position:absolute;left:0;top:30px;width:240px;height:170px;border-radius:20px;overflow:hidden;border:1px solid #EBEBEB;background:#D9F1F0"><sc-if value="{{ M.heroFamilia.isVideo }}" hint-placeholder-val="{{ false }}"><video data-hero-video="" data-src="{{ M.heroFamilia.src }}" muted="" loop="" autoplay="" playsinline="" preload="metadata" aria-hidden="true" tabindex="-1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video></sc-if><sc-if value="{{ M.heroFamilia.isImg }}" hint-placeholder-val="{{ false }}"><div role="img" aria-hidden="true" style="position:absolute;inset:0;background:{{ M.heroFamilia.bg }}"></div></sc-if><sc-if value="{{ M.heroFamilia.empty }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#CFEAE9 0 10px,#DDF1F0 10px 20px)"></div></sc-if></div>
+        <div data-reveal="" style="position:absolute;left:40px;top:222px;width:266px;height:133px;border-radius:18px;overflow:hidden;border:1px solid #EBEBEB;background:#FFFFFF"><div style="position:absolute;inset:0;background:#FFFFFF;padding:16px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="#10A6A4" aria-hidden="true"><ellipse cx="5.5" cy="11" rx="2" ry="2.8"/><ellipse cx="9.5" cy="6" rx="2" ry="2.8"/><ellipse cx="14.5" cy="6" rx="2" ry="2.8"/><ellipse cx="18.5" cy="11" rx="2" ry="2.8"/><path d="M12 11.5c-3 0-6 3.4-6 6.2 0 2 1.6 2.8 3 2.8 1.2 0 2-.5 3-.5s1.8.5 3 .5c1.4 0 3-.8 3-2.8 0-2.8-3-6.2-6-6.2z"/></svg><span style="font-size:17px;line-height:1.1;font-weight:500;color:#077B7A">Amar Mascotas<br><span style="color:#6BB7B6">Veterinaria a domicilio</span></span></div><div style="position:absolute;inset:0;transition:opacity .45s ease;opacity:{{ rotA }}"><sc-if value="{{ M.heroMascota.isVideo }}" hint-placeholder-val="{{ false }}"><video data-hero-video="" data-src="{{ M.heroMascota.src }}" muted="" loop="" autoplay="" playsinline="" preload="metadata" aria-hidden="true" tabindex="-1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video></sc-if><sc-if value="{{ M.heroMascota.isImg }}" hint-placeholder-val="{{ false }}"><div role="img" aria-hidden="true" style="position:absolute;inset:0;background:{{ M.heroMascota.bg }}"></div></sc-if><sc-if value="{{ M.heroMascota.empty }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#CFEAE9 0 10px,#DDF1F0 10px 20px)"></div></sc-if></div></div><!-- [CONFIRMAR CON CLIENTE] texto de Amar Mascotas -->
+        <div data-reveal="" style="position:absolute;left:70px;top:384px;width:173px;height:118px;border-radius:18px;overflow:hidden;border:1px solid #EBEBEB"><div style="position:absolute;inset:0;background:#D9F1F0;padding:16px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10A6A4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M10 21v-5h4v5M12 8v4M10 10h4"/></svg><span style="font-size:17px;line-height:1.1;font-weight:500;color:#077B7A">Centros médicos<br><span style="color:#6BB7B6">propios</span></span></div></div>
+        <div data-reveal="" style="position:absolute;left:210px;top:528px;width:62px;height:62px;border-radius:16px;border:1px solid #EBEBEB;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10A6A4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7 7-7z"/></svg></div>
+        <div data-reveal="" style="position:absolute;right:120px;top:20px;width:178px;height:117px;border-radius:18px;overflow:hidden;border:1px solid #EBEBEB;background:#FFFFFF"><div style="position:absolute;inset:0;background:#FFFFFF;padding:16px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5l8-3z" fill="#10A6A4"/><path d="M12 8v6M9 11h6" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/></svg><span style="font-size:17px;line-height:1.1;font-weight:500;color:#077B7A">El mejor<br><span style="color:#6BB7B6">de los cuidados</span></span></div><div style="position:absolute;inset:0;transition:opacity .45s ease;opacity:{{ rotB }}"><sc-if value="{{ M.heroCuidados.isVideo }}" hint-placeholder-val="{{ false }}"><video data-hero-video="" data-src="{{ M.heroCuidados.src }}" muted="" loop="" autoplay="" playsinline="" preload="metadata" aria-hidden="true" tabindex="-1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video></sc-if><sc-if value="{{ M.heroCuidados.isImg }}" hint-placeholder-val="{{ false }}"><div role="img" aria-hidden="true" style="position:absolute;inset:0;background:{{ M.heroCuidados.bg }}"></div></sc-if><sc-if value="{{ M.heroCuidados.empty }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#CFEAE9 0 10px,#DDF1F0 10px 20px)"></div></sc-if></div></div>
+        <div data-reveal="" style="position:absolute;right:80px;top:158px;width:240px;height:155px;border-radius:20px;overflow:hidden;border:1px solid #EBEBEB;background:#D9F1F0"><sc-if value="{{ M.heroPareja.isVideo }}" hint-placeholder-val="{{ false }}"><video data-hero-video="" data-src="{{ M.heroPareja.src }}" muted="" loop="" autoplay="" playsinline="" preload="metadata" aria-hidden="true" tabindex="-1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video></sc-if><sc-if value="{{ M.heroPareja.isImg }}" hint-placeholder-val="{{ false }}"><div role="img" aria-hidden="true" style="position:absolute;inset:0;background:{{ M.heroPareja.bg }}"></div></sc-if><sc-if value="{{ M.heroPareja.empty }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#CFEAE9 0 10px,#DDF1F0 10px 20px)"></div></sc-if></div>
+        <div data-reveal="" style="position:absolute;right:110px;top:332px;width:168px;height:122px;border-radius:18px;overflow:hidden;border:1px solid #EBEBEB"><div style="position:absolute;inset:0;background:#D9F1F0;padding:16px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10A6A4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7 7-7z"/></svg><span style="font-size:17px;line-height:1.1;font-weight:500;color:#077B7A">Médico online<br><span style="color:#6BB7B6">24 hs</span></span></div></div>
+        <div data-reveal="" style="position:absolute;right:290px;top:440px;width:62px;height:62px;border-radius:16px;border:1px solid #EBEBEB;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10A6A4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2l4 4M17 7l3-3M19 9l-8.7 8.7a2 2 0 0 1-2.8 0L6.3 16.5a2 2 0 0 1 0-2.8L15 5M9 11l4 4M5 19l-3 3M14 4l6 6"/></svg></div>
+        <div style="position:relative;z-index:2;max-width:600px;margin:0 auto;padding-top:96px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:24px">
+          <h1 aria-label="{{ heroTitle }}" style="margin:0;font-size:72px;line-height:.9;font-weight:500;letter-spacing:-0.035em;color:#077B7A;display:flex;flex-wrap:wrap;justify-content:center;column-gap:.24em">
+            <sc-for list="{{ heroWords }}" as="hw" hint-placeholder-count="5"><span data-word="" aria-hidden="true" style="display:inline-block">{{ hw }}</span></sc-for>
+          </h1>
+          <p data-reveal="" style="margin:0;font-size:19px;line-height:1.45;color:#7A8A8A;max-width:500px;text-wrap:pretty">Cambiá tu obra social y accedé a una cobertura médica con amplia red de clínicas y centros propios, para vos y tu familia.</p>
+          <div data-reveal="" style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:4px">
+            <a href="{{ waGeneral }}" target="_blank" rel="noopener" onClick="{{ trkHero }}" style="display:inline-flex;align-items:center;background:#10A6A4;color:#FFFFFF;font-weight:700;font-size:18px;padding:14px 26px;border-radius:15px;text-decoration:none;transition:transform .3s ease,box-shadow .3s ease" style-hover="transform:translateY(-2px);box-shadow:0 2px 4px rgba(0,0,0,.04);color:#FFFFFF">Quiero asesoramiento</a>
+            <a href="{{ waGeneral }}" target="_blank" rel="noopener" onClick="{{ trkHero2 }}" style="display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;border:1px solid #EBEBEB;color:#10A6A4;font-weight:700;font-size:18px;padding:13px 24px;border-radius:15px;text-decoration:none;transition:transform .3s ease,box-shadow .3s ease" style-hover="transform:translateY(-2px);box-shadow:0 2px 4px rgba(0,0,0,.04);color:#10A6A4"><svg width="20" height="20" viewBox="0 0 24 24" fill="#10A6A4" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>Contactar por WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ heroMob }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:560px;margin:0 auto;padding-top:28px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px">
+        <h1 aria-label="{{ heroTitle }}" style="margin:0;font-size:clamp(40px,7vw,60px);line-height:.92;font-weight:500;letter-spacing:-0.035em;color:#077B7A;display:flex;flex-wrap:wrap;justify-content:center;column-gap:.24em">
+          <sc-for list="{{ heroWords }}" as="hw" hint-placeholder-count="5"><span data-word="" aria-hidden="true" style="display:inline-block">{{ hw }}</span></sc-for>
+        </h1>
+        <p data-reveal="" style="margin:0;font-size:17px;line-height:1.45;color:#7A8A8A;text-wrap:pretty">Cambiá tu obra social y accedé a una cobertura médica con amplia red de clínicas y centros propios, para vos y tu familia.</p>
+        <a href="{{ waGeneral }}" target="_blank" rel="noopener" onClick="{{ trkHero }}" style="width:100%;display:flex;justify-content:center;background:#10A6A4;color:#FFFFFF;font-weight:700;font-size:18px;padding:16px 26px;border-radius:15px;text-decoration:none">Quiero asesoramiento</a>
+        <div style="width:100%;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;text-align:left">
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div data-reveal="" style="position:relative;height:150px;border-radius:18px;overflow:hidden;border:1px solid #EBEBEB;background:#D9F1F0;margin-left:-12px"><sc-if value="{{ M.heroFamilia.isVideo }}" hint-placeholder-val="{{ false }}"><video data-hero-video="" data-src="{{ M.heroFamilia.src }}" muted="" loop="" autoplay="" playsinline="" preload="metadata" aria-hidden="true" tabindex="-1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video></sc-if><sc-if value="{{ M.heroFamilia.isImg }}" hint-placeholder-val="{{ false }}"><div role="img" aria-hidden="true" style="position:absolute;inset:0;background:{{ M.heroFamilia.bg }}"></div></sc-if><sc-if value="{{ M.heroFamilia.empty }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#CFEAE9 0 10px,#DDF1F0 10px 20px)"></div></sc-if></div>
+            <div data-reveal="" style="position:relative;height:125px;border-radius:18px;overflow:hidden;border:1px solid #EBEBEB;background:#FFFFFF"><div style="position:absolute;inset:0;background:#FFFFFF;padding:12px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5l8-3z" fill="#10A6A4"/><path d="M12 8v6M9 11h6" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/></svg><span style="font-size:15px;line-height:1.1;font-weight:500;color:#077B7A">El mejor<br><span style="color:#6BB7B6">de los cuidados</span></span></div><div style="position:absolute;inset:0;transition:opacity .45s ease;opacity:{{ rotB }}"><sc-if value="{{ M.heroCuidados.isVideo }}" hint-placeholder-val="{{ false }}"><video data-hero-video="" data-src="{{ M.heroCuidados.src }}" muted="" loop="" autoplay="" playsinline="" preload="metadata" aria-hidden="true" tabindex="-1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video></sc-if><sc-if value="{{ M.heroCuidados.isImg }}" hint-placeholder-val="{{ false }}"><div role="img" aria-hidden="true" style="position:absolute;inset:0;background:{{ M.heroCuidados.bg }}"></div></sc-if><sc-if value="{{ M.heroCuidados.empty }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#CFEAE9 0 10px,#DDF1F0 10px 20px)"></div></sc-if></div></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;margin-top:32px">
+            <div data-reveal="" style="position:relative;height:135px;border-radius:18px;overflow:hidden;border:1px solid #EBEBEB;background:#FFFFFF"><div style="position:absolute;inset:0;background:#FFFFFF;padding:12px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="#10A6A4" aria-hidden="true"><ellipse cx="5.5" cy="11" rx="2" ry="2.8"/><ellipse cx="9.5" cy="6" rx="2" ry="2.8"/><ellipse cx="14.5" cy="6" rx="2" ry="2.8"/><ellipse cx="18.5" cy="11" rx="2" ry="2.8"/><path d="M12 11.5c-3 0-6 3.4-6 6.2 0 2 1.6 2.8 3 2.8 1.2 0 2-.5 3-.5s1.8.5 3 .5c1.4 0 3-.8 3-2.8 0-2.8-3-6.2-6-6.2z"/></svg><span style="font-size:15px;line-height:1.1;font-weight:500;color:#077B7A">Amar Mascotas<br><span style="color:#6BB7B6">Veterinaria a domicilio</span></span></div><div style="position:absolute;inset:0;transition:opacity .45s ease;opacity:{{ rotA }}"><sc-if value="{{ M.heroMascota.isVideo }}" hint-placeholder-val="{{ false }}"><video data-hero-video="" data-src="{{ M.heroMascota.src }}" muted="" loop="" autoplay="" playsinline="" preload="metadata" aria-hidden="true" tabindex="-1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video></sc-if><sc-if value="{{ M.heroMascota.isImg }}" hint-placeholder-val="{{ false }}"><div role="img" aria-hidden="true" style="position:absolute;inset:0;background:{{ M.heroMascota.bg }}"></div></sc-if><sc-if value="{{ M.heroMascota.empty }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#CFEAE9 0 10px,#DDF1F0 10px 20px)"></div></sc-if></div></div>
+            <div data-reveal="" style="position:relative;height:150px;border-radius:18px;overflow:hidden;border:1px solid #EBEBEB;background:#D9F1F0;margin-right:-12px"><sc-if value="{{ M.heroPareja.isVideo }}" hint-placeholder-val="{{ false }}"><video data-hero-video="" data-src="{{ M.heroPareja.src }}" muted="" loop="" autoplay="" playsinline="" preload="metadata" aria-hidden="true" tabindex="-1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video></sc-if><sc-if value="{{ M.heroPareja.isImg }}" hint-placeholder-val="{{ false }}"><div role="img" aria-hidden="true" style="position:absolute;inset:0;background:{{ M.heroPareja.bg }}"></div></sc-if><sc-if value="{{ M.heroPareja.empty }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#CFEAE9 0 10px,#DDF1F0 10px 20px)"></div></sc-if></div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <div style="margin-top:clamp(28px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:12px">
+      <a data-reveal="" href="{{ waGeneral }}" target="_blank" rel="noopener" onClick="{{ trkBar }}" style="display:flex;align-items:center;gap:14px;background:#FFFFFF;border:1px solid #EBEBEB;border-radius:20px;padding:18px 20px;text-decoration:none;transition:transform .3s ease" style-hover="transform:translateY(-2px)">
+        <span style="width:44px;height:44px;flex:none;border-radius:50%;background:#6ABD6E;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg></span>
+        <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;color:#7A8A8A">WhatsApp de asesoramiento</span><span style="font-size:17px;font-weight:700;color:#077B7A">{{ waDisplay }} · {{ waHours }}</span></span>
+      </a>
+      <a data-reveal="" href="tel:08108883226" style="display:flex;align-items:center;gap:14px;background:#FFFFFF;border:1px solid #EBEBEB;border-radius:20px;padding:18px 20px;text-decoration:none;transition:transform .3s ease" style-hover="transform:translateY(-2px)">
+        <span style="width:44px;height:44px;flex:none;border-radius:50%;background:#EC7A2C;display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></span>
+        <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;color:#7A8A8A">Urgencias médicas</span><span style="font-size:17px;font-weight:700;color:#077B7A">0810-888-3226</span></span>
+      </a>
+      <a data-reveal="" href="tel:08102225522" style="display:flex;align-items:center;gap:14px;background:#FFFFFF;border:1px solid #EBEBEB;border-radius:20px;padding:18px 20px;text-decoration:none;transition:transform .3s ease" style-hover="transform:translateY(-2px)">
+        <span style="width:44px;height:44px;flex:none;border-radius:50%;background:#D9F1F0;display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#077B7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></span>
+        <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;color:#7A8A8A">Atención al cliente</span><span style="font-size:17px;font-weight:700;color:#077B7A">0810-222-5522</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section aria-label="Premedic en cifras" style="padding:clamp(40px,5vw,72px) 0 0;content-visibility:auto;contain-intrinsic-size:auto 260px">
+  <div style="max-width:1430px;margin:0 auto;padding:0 clamp(16px,5.2vw,75px)">
+    <div data-counters="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">
+      <sc-for list="{{ cifras }}" as="s" hint-placeholder-count="4">
+        <div data-reveal="" style="background:#EFF8F8;border-radius:20px;padding:clamp(20px,2.6vw,32px);display:flex;flex-direction:column;gap:6px">
+          <span data-count="{{ s.value }}" data-pre="{{ s.pre }}" data-suf="{{ s.suf }}" style="font-size:48px;line-height:1;font-weight:500;letter-spacing:-0.03em;color:#077B7A;font-variant-numeric:tabular-nums;white-space:nowrap">{{ s.text }}</span>
+          <span style="font-size:15px;line-height:1.3;color:#7A8A8A">{{ s.label }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section aria-label="Destacados" style="padding:clamp(48px,6vw,88px) 0;content-visibility:auto;contain-intrinsic-size:auto 560px">
+  <div style="max-width:1430px;margin:0 auto;padding:0 clamp(16px,5.2vw,75px)">
+    <div data-reveal="" style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:28px">
+      <h2 style="margin:0;font-size:clamp(32px,4vw,52px);line-height:.95;font-weight:500;letter-spacing:-0.03em;color:#077B7A">Pensado para tu día a día</h2>
+      <sc-if value="{{ navDesk }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;gap:10px">
+          <button type="button" aria-label="Anterior" onClick="{{ destPrev }}" style="width:48px;height:48px;border-radius:50%;border:1px solid #EBEBEB;background:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .3s ease" style-hover="transform:translateY(-2px)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10A6A4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+          <button type="button" aria-label="Siguiente" onClick="{{ destNext }}" style="width:48px;height:48px;border-radius:50%;border:1px solid #EBEBEB;background:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .3s ease" style-hover="transform:translateY(-2px)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10A6A4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+        </div>
+      </sc-if>
+    </div>
+    <div data-reveal="" data-drag="" ref="{{ destRef }}" style="display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;cursor:grab;user-select:none">
+      <sc-for list="{{ destacados }}" as="d" hint-placeholder-count="3">
+        <article style="position:relative;flex:0 0 min(86%,600px);height:clamp(400px,34vw,440px);border-radius:32px;overflow:hidden;scroll-snap-align:start;background:{{ d.bg }}repeating-linear-gradient(135deg,#0E8F8D 0 12px,#0C8482 12px 24px)">
+          <span style="position:absolute;top:18px;left:20px;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#D9F1F0">{{ d.label }}</span>
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,60,60,0) 30%,rgba(0,52,51,.82) 100%)"></div>
+          <div style="position:absolute;left:0;right:0;bottom:0;padding:clamp(22px,3vw,36px);display:flex;flex-direction:column;align-items:flex-start;gap:18px">
+            <h3 style="margin:0;font-size:clamp(28px,3vw,38px);line-height:1;font-weight:500;letter-spacing:-0.025em;color:#FFFFFF;max-width:440px;text-wrap:balance">{{ d.title }}</h3>
+            <a href="{{ d.href }}" target="_blank" rel="noopener" onClick="{{ d.onClick }}" style="display:inline-flex;align-items:center;background:#FFFFFF;color:#005857;font-weight:700;font-size:16px;padding:12px 22px;border-radius:15px;text-decoration:none;transition:transform .3s ease" style-hover="transform:translateY(-2px);color:#005857">Conocer más</a>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="planes" style="background:linear-gradient(180deg,#EFF8F8 0%,#FFFFFF 100%);padding:clamp(56px,7vw,104px) 0 clamp(48px,4vw,64px);content-visibility:auto;contain-intrinsic-size:auto 820px">
+  <div style="max-width:1430px;margin:0 auto;padding:0 clamp(16px,5.2vw,75px)">
+    <div data-reveal="" style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:32px">
+      <div style="display:flex;flex-direction:column;gap:14px;max-width:640px">
+        <h2 style="margin:0;font-size:clamp(36px,4.4vw,56px);line-height:.95;font-weight:500;letter-spacing:-0.03em;color:#077B7A">Nuestros planes</h2>
+        <p style="margin:0;font-size:18px;line-height:1.45;color:#7A8A8A;text-wrap:pretty">Todos los planes tienen cobertura en consultas y prácticas, internación y emergencias médicas.</p>
+      </div>
+      <sc-if value="{{ navDesk }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;gap:10px;flex:none">
+          <button type="button" aria-label="Planes anteriores" onClick="{{ planPrev }}" style="width:48px;height:48px;border-radius:50%;border:1px solid #EBEBEB;background:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .3s ease" style-hover="transform:translateY(-2px)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10A6A4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+          <button type="button" aria-label="Planes siguientes" onClick="{{ planNext }}" style="width:48px;height:48px;border-radius:50%;border:1px solid #EBEBEB;background:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .3s ease" style-hover="transform:translateY(-2px)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10A6A4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+        </div>
+      </sc-if>
+    </div>
+    <div data-reveal="" data-drag="" ref="{{ planRef }}" style="display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:8px 2px 10px;cursor:grab;user-select:none">
+      <sc-for list="{{ planes }}" as="p" hint-placeholder-count="4">
+        <article data-tilt="" style="flex:0 0 clamp(276px,78vw,300px);scroll-snap-align:start;background:#FFFFFF;border:1px solid #EBEBEB;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.22,1,.36,1)">
+          <div style="position:relative;height:200px;background:{{ p.bg }}repeating-linear-gradient(135deg,#0E8F8D 0 12px,#0C8482 12px 24px)">
+            <span style="position:absolute;top:56px;left:16px;font-family:ui-monospace,Menlo,monospace;font-size:10px;color:#D9F1F0">{{ p.label }}</span>
+            <sc-if value="{{ p.hasLevel }}" hint-placeholder-val="{{ true }}">
+              <div role="img" aria-label="{{ p.levelLabel }}" style="position:absolute;top:12px;left:12px;z-index:2;display:flex;align-items:flex-end;gap:3px;background:#FFFFFF;border-radius:100px;padding:7px 11px;height:30px">
+                <span style="width:5px;height:6px;border-radius:2px;background:{{ p.b1 }}"></span>
+                <span style="width:5px;height:9px;border-radius:2px;background:{{ p.b2 }}"></span>
+                <span style="width:5px;height:12px;border-radius:2px;background:{{ p.b3 }}"></span>
+                <span style="width:5px;height:15px;border-radius:2px;background:{{ p.b4 }}"></span>
+              </div>
+            </sc-if>
+            <sc-if value="{{ p.hot }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:12px;right:12px;z-index:2;background:#FFFFFF;color:#005857;font-size:13px;font-weight:700;padding:6px 12px;border-radius:100px">Más elegido</span></sc-if>
+            <sc-if value="{{ p.soon }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:12px;right:12px;z-index:2;background:#FFFFFF;color:#7A8A8A;font-size:13px;font-weight:700;padding:6px 12px;border-radius:100px">Próximamente</span></sc-if>
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,52,51,0) 25%,rgba(0,45,45,.55) 62%,rgba(0,35,35,.92) 100%)"></div>
+            <div style="position:absolute;left:20px;bottom:16px;display:flex;flex-direction:column;gap:2px;text-shadow:0 1px 3px rgba(0,0,0,.4)">
+              <span style="font-size:12px;font-weight:700;letter-spacing:.16em;color:#D9F1F0">PLAN</span>
+              <span style="font-size:30px;font-weight:500;line-height:1;letter-spacing:-0.02em;color:#FFFFFF">{{ p.name }}</span>
+            </div>
+          </div>
+          <div style="padding:22px 20px 20px;display:flex;flex-direction:column;gap:16px;flex:1">
+            <p style="margin:0;font-size:17px;line-height:1.3;font-weight:500;color:#077B7A">{{ p.sub }}</p>
+            <sc-if value="{{ p.hasInherit }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:0;font-size:14px;line-height:1.35;font-weight:500;color:#077B7A">{{ p.inherit }}</p>
+            </sc-if>
+            <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+              <sc-for list="{{ p.points }}" as="pt" hint-placeholder-count="4">
+                <li style="display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.35;color:#5E7070"><span style="width:20px;height:20px;flex:none;border-radius:50%;background:#D9F1F0;display:flex;align-items:center;justify-content:center;margin-top:1px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#10A6A4" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>{{ pt }}</li>
+              </sc-for>
+            </ul>
+            <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
+              <sc-if value="{{ p.canDetail }}" hint-placeholder-val="{{ true }}">
+                <button type="button" aria-haspopup="dialog" onClick="{{ p.openModal }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:6px;background:none;border:none;padding:10px 0;min-height:44px;font-family:inherit;font-size:15px;font-weight:700;color:#077B7A;cursor:pointer;text-decoration:none;white-space:nowrap" style-hover="text-decoration:underline">Ver más detalles <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#077B7A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+              </sc-if>
+              <a href="{{ p.href }}" target="_blank" rel="noopener" onClick="{{ p.onClick }}" style="display:flex;justify-content:center;background:#10A6A4;color:#FFFFFF;font-weight:700;font-size:17px;padding:14px 20px;border-radius:15px;text-decoration:none;transition:transform .3s ease,box-shadow .3s ease" style-hover="transform:translateY(-2px);box-shadow:0 2px 4px rgba(0,0,0,.04);color:#FFFFFF">Cotizar este plan</a>
+            </div>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="asociarte-t" style="padding:clamp(56px,4vw,64px) 0 clamp(28px,3vw,48px);content-visibility:auto;contain-intrinsic-size:auto 640px">
+  <div style="max-width:1430px;margin:0 auto;padding:0 clamp(16px,5.2vw,75px)">
+    <div data-reveal="" style="display:flex;flex-direction:column;gap:14px;max-width:640px;margin-bottom:32px">
+      <h2 id="asociarte-t" style="margin:0;font-size:clamp(36px,4.4vw,56px);line-height:.95;font-weight:500;letter-spacing:-0.03em;color:#077B7A">¿Cómo te asociás?</h2>
+      <p style="margin:0;font-size:18px;line-height:1.45;color:#7A8A8A;text-wrap:pretty">Elegí tu situación y un asesor te cuenta las opciones.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px">
+      <article data-reveal="" style="background:#D9F1F0;border-radius:20px;padding:28px 24px 24px;display:flex;flex-direction:column;gap:14px;min-height:280px">
+        <span style="width:52px;height:52px;border-radius:50%;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10A6A4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="3" y1="13" x2="21" y2="13"></line></svg></span>
+        <h3 style="margin:6px 0 0;font-size:24px;line-height:1.05;font-weight:500;letter-spacing:-0.02em;color:#077B7A">Relación de dependencia</h3>
+        <p style="margin:0;font-size:16px;line-height:1.45;color:#4F6B6B;text-wrap:pretty">Derivá tus aportes de obra social y consultá qué plan te conviene.</p>
+        <a href="{{ waDep }}" target="_blank" rel="noopener" onClick="{{ trkDep }}" style="margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;background:#FFFFFF;color:#077B7A;font-weight:700;font-size:16px;padding:12px 22px;border-radius:15px;text-decoration:none;transition:transform .3s ease" style-hover="transform:translateY(-2px);color:#077B7A">Consultar</a>
+      </article>
+      <article data-reveal="" style="background:#D9F1F0;border-radius:20px;padding:28px 24px 24px;display:flex;flex-direction:column;gap:14px;min-height:280px">
+        <span style="width:52px;height:52px;border-radius:50%;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10A6A4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"></rect><line x1="9" y1="8" x2="15" y2="8"></line><line x1="9" y1="12" x2="15" y2="12"></line><line x1="9" y1="16" x2="12" y2="16"></line></svg></span>
+        <h3 style="margin:6px 0 0;font-size:24px;line-height:1.05;font-weight:500;letter-spacing:-0.02em;color:#077B7A">Monotributista</h3>
+        <p style="margin:0;font-size:16px;line-height:1.45;color:#4F6B6B;text-wrap:pretty">Consultá cómo asociarte con tus aportes.</p>
+        <a href="{{ waMono }}" target="_blank" rel="noopener" onClick="{{ trkMono }}" style="margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;background:#FFFFFF;color:#077B7A;font-weight:700;font-size:16px;padding:12px 22px;border-radius:15px;text-decoration:none;transition:transform .3s ease" style-hover="transform:translateY(-2px);color:#077B7A">Consultar</a>
+      </article>
+      <article data-reveal="" style="background:#D9F1F0;border-radius:20px;padding:28px 24px 24px;display:flex;flex-direction:column;gap:14px;min-height:280px">
+        <span style="width:52px;height:52px;border-radius:50%;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10A6A4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg></span>
+        <h3 style="margin:6px 0 0;font-size:24px;line-height:1.05;font-weight:500;letter-spacing:-0.02em;color:#077B7A">Autónomo o particular</h3>
+        <p style="margin:0;font-size:16px;line-height:1.45;color:#4F6B6B;text-wrap:pretty">Planes pensados para quien se asocia por su cuenta.</p>
+        <a href="{{ waAuto }}" target="_blank" rel="noopener" onClick="{{ trkAuto }}" style="margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;background:#FFFFFF;color:#077B7A;font-weight:700;font-size:16px;padding:12px 22px;border-radius:15px;text-decoration:none;transition:transform .3s ease" style-hover="transform:translateY(-2px);color:#077B7A">Consultar</a>
+      </article>
+      <article data-reveal="" style="background:#D9F1F0;border-radius:20px;padding:28px 24px 24px;display:flex;flex-direction:column;gap:14px;min-height:280px">
+        <span style="width:52px;height:52px;border-radius:50%;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10A6A4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"></rect><line x1="9" y1="7" x2="9" y2="7.01"></line><line x1="15" y1="7" x2="15" y2="7.01"></line><line x1="9" y1="11" x2="9" y2="11.01"></line><line x1="15" y1="11" x2="15" y2="11.01"></line><rect x="10" y="15" width="4" height="6"></rect></svg></span>
+        <h3 style="margin:6px 0 0;font-size:24px;line-height:1.05;font-weight:500;letter-spacing:-0.02em;color:#077B7A">Empresas</h3>
+        <p style="margin:0;font-size:16px;line-height:1.45;color:#4F6B6B;text-wrap:pretty">Cobertura para tu equipo de trabajo.</p>
+        <a href="{{ waEmp }}" target="_blank" rel="noopener" onClick="{{ trkEmp }}" style="margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;background:#FFFFFF;color:#077B7A;font-weight:700;font-size:16px;padding:12px 22px;border-radius:15px;text-decoration:none;transition:transform .3s ease" style-hover="transform:translateY(-2px);color:#077B7A">Consultar</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="pasos-t" style="background:#FFFFFF;padding:clamp(40px,5vw,72px) 0 clamp(56px,7vw,104px);content-visibility:auto;contain-intrinsic-size:auto 520px">
+  <div style="max-width:1430px;margin:0 auto;padding:0 clamp(16px,5.2vw,75px)">
+    <div style="max-width:1080px;margin:0 auto;border-top:1px solid #EBEBEB;padding-top:clamp(40px,5vw,72px);display:flex;flex-direction:column;align-items:center;gap:clamp(32px,4vw,52px)">
+      <h2 id="pasos-t" data-reveal="" style="margin:0;text-align:center;font-size:clamp(32px,4vw,48px);line-height:.95;font-weight:500;letter-spacing:-0.03em;color:#077B7A;text-wrap:balance">Cómo asociarte en 3 pasos</h2>
+      <sc-if value="{{ stepsH }}" hint-placeholder-val="{{ true }}">
+        <ol data-seq="" style="list-style:none;margin:0;padding:0;width:100%;position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+          <div aria-hidden="true" style="position:absolute;top:27px;left:calc(16.66% + 40px);width:calc(33.33% - 80px);height:2px;background:#EBEBEB;border-radius:2px;overflow:hidden"><div data-seq-line="" data-axis="x" data-delay="250" style="height:100%;background:#10A6A4;transform-origin:left center"></div></div>
+          <div aria-hidden="true" style="position:absolute;top:27px;left:calc(50% + 40px);width:calc(33.33% - 80px);height:2px;background:#EBEBEB;border-radius:2px;overflow:hidden"><div data-seq-line="" data-axis="x" data-delay="900" style="height:100%;background:#10A6A4;transform-origin:left center"></div></div>
+          <sc-for list="{{ pasos }}" as="st" hint-placeholder-count="3">
+            <li data-seq-step="" data-delay="{{ st.delay }}" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;padding:0 12px">
+              <span style="width:56px;height:56px;border-radius:50%;background:#10A6A4;color:#FFFFFF;font-size:22px;font-weight:700;display:flex;align-items:center;justify-content:center">{{ st.n }}</span>
+              <h3 style="margin:8px 0 0;font-size:22px;line-height:1.1;font-weight:500;letter-spacing:-0.015em;color:#077B7A">{{ st.title }}</h3>
+              <p style="margin:0;font-size:16px;line-height:1.45;color:#7A8A8A;max-width:260px;text-wrap:pretty">{{ st.text }}</p>
+            </li>
+          </sc-for>
+        </ol>
+      </sc-if>
+      <sc-if value="{{ stepsV }}" hint-placeholder-val="{{ false }}">
+        <ol data-seq="" style="list-style:none;margin:0;padding:0;width:100%;display:flex;flex-direction:column">
+          <sc-for list="{{ pasos }}" as="st" hint-placeholder-count="3">
+            <li style="display:grid;grid-template-columns:52px 1fr;column-gap:16px">
+              <div style="display:flex;flex-direction:column;align-items:center">
+                <span data-seq-step="" data-delay="{{ st.delay }}" style="width:52px;height:52px;flex:none;border-radius:50%;background:#10A6A4;color:#FFFFFF;font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:center">{{ st.n }}</span>
+                <sc-if value="{{ st.notLast }}" hint-placeholder-val="{{ true }}">
+                  <div aria-hidden="true" style="flex:1;width:2px;min-height:36px;margin:8px 0;background:#EBEBEB;border-radius:2px;overflow:hidden"><div data-seq-line="" data-axis="y" data-delay="{{ st.lineDelay }}" style="width:100%;height:100%;background:#10A6A4;transform-origin:center top"></div></div>
+                </sc-if>
+              </div>
+              <div data-seq-step="" data-delay="{{ st.delay }}" style="padding:10px 0 28px;display:flex;flex-direction:column;gap:6px">
+                <h3 style="margin:0;font-size:21px;line-height:1.1;font-weight:500;letter-spacing:-0.015em;color:#077B7A">{{ st.title }}</h3>
+                <p style="margin:0;font-size:16px;line-height:1.45;color:#7A8A8A;text-wrap:pretty">{{ st.text }}</p>
+              </div>
+            </li>
+          </sc-for>
+        </ol>
+      </sc-if>
+      <a data-reveal="" href="{{ waGeneral }}" target="_blank" rel="noopener" onClick="{{ trkPasos }}" style="display:inline-flex;align-items:center;gap:10px;background:#10A6A4;color:#FFFFFF;font-weight:700;font-size:18px;padding:14px 26px;border-radius:15px;text-decoration:none;transition:transform .3s ease,box-shadow .3s ease" style-hover="transform:translateY(-2px);box-shadow:0 2px 4px rgba(0,0,0,.04);color:#FFFFFF"><svg width="20" height="20" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>Empezar por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section id="beneficios" style="background:linear-gradient(180deg,#EFF8F8 0%,#FFFFFF 100%);padding:clamp(56px,7vw,104px) 0;content-visibility:auto;contain-intrinsic-size:auto 680px">
+  <div style="max-width:1430px;margin:0 auto;padding:0 clamp(16px,5.2vw,75px)">
+    <div data-reveal="" style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:32px">
+      <div style="display:flex;flex-direction:column;gap:14px;max-width:640px">
+        <h2 style="margin:0;font-size:clamp(36px,4.4vw,56px);line-height:.95;font-weight:500;letter-spacing:-0.03em;color:#077B7A">Beneficios que suman</h2>
+        <p style="margin:0;font-size:18px;line-height:1.45;color:#7A8A8A;text-wrap:pretty">Además de tu cobertura, tenés servicios pensados para que te ocupes menos y te cuides más.</p>
+      </div>
+      <sc-if value="{{ navDesk }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;gap:10px;flex:none">
+          <button type="button" aria-label="Beneficios anteriores" onClick="{{ benPrev }}" style="width:48px;height:48px;border-radius:50%;border:1px solid #EBEBEB;background:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .3s ease" style-hover="transform:translateY(-2px)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10A6A4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+          <button type="button" aria-label="Beneficios siguientes" onClick="{{ benNext }}" style="width:48px;height:48px;border-radius:50%;border:1px solid #EBEBEB;background:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .3s ease" style-hover="transform:translateY(-2px)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10A6A4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+        </div>
+      </sc-if>
+    </div>
+    <div data-reveal="" data-drag="" ref="{{ benRef }}" style="display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:6px;cursor:grab;user-select:none">
+      <sc-for list="{{ beneficios }}" as="b" hint-placeholder-count="4">
+        <article style="flex:0 0 clamp(260px,72vw,290px);scroll-snap-align:start;background:#FFFFFF;border:1px solid #EBEBEB;border-radius:20px;padding:14px 14px 20px;display:flex;flex-direction:column;gap:16px">
+          <div style="aspect-ratio:4/3;border-radius:15px;background:{{ b.ill }};position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center">
+            <sc-if value="{{ b.isCross }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,0.18)">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </div>
+            </sc-if>
+            <sc-if value="{{ b.hasLabel }}" hint-placeholder-val="{{ false }}">
+              <span style="position:absolute;bottom:10px;left:10px;font-family:ui-monospace,Menlo,monospace;font-size:10px;color:{{ b.ink }}">{{ b.label }}</span>
+            </sc-if>
+          </div>
+          <div style="padding:0 6px;display:flex;flex-direction:column;gap:8px;flex:1">
+            <h3 style="margin:0;font-size:22px;line-height:1.1;font-weight:500;letter-spacing:-0.015em;color:#077B7A">{{ b.title }}</h3>
+            <p style="margin:0;font-size:15px;line-height:1.4;color:#7A8A8A;text-wrap:pretty">{{ b.desc }}</p>
+          </div>
+          <a href="{{ b.href }}" target="_blank" rel="noopener" onClick="{{ b.onClick }}" style="margin:0 6px;align-self:flex-start;display:inline-flex;align-items:center;font-weight:700;font-size:15px;padding:10px 18px;border-radius:15px;text-decoration:none;transition:transform .3s ease;background:{{ b.btnBg }};color:{{ b.ink }}" style-hover="transform:translateY(-2px)">Conocer más</a>
+        </article>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+
+<section id="prestadores" style="padding:clamp(56px,7vw,104px) 0;overflow:hidden;content-visibility:auto;contain-intrinsic-size:auto 760px">
+  <div style="max-width:1430px;margin:0 auto;padding:0 clamp(16px,5.2vw,75px)">
+    <div data-reveal="" style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:36px">
+      <h2 style="margin:0;font-size:clamp(34px,4.4vw,56px);line-height:.95;font-weight:500;letter-spacing:-0.03em;color:#077B7A;max-width:760px;text-wrap:balance">Clínicas y sanatorios de primer nivel</h2>
+      <p style="margin:0;font-size:18px;line-height:1.45;color:#7A8A8A;max-width:560px;text-wrap:pretty">Atendete en instituciones de referencia y en centros médicos propios, cerca de donde vivís.</p>
+    </div>
+  </div>
+  <div aria-hidden="true" ref="{{ marqueeWrapRef }}" style="position:relative;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)">
+    <div ref="{{ marqueeRef }}" style="display:flex;gap:16px;width:max-content;padding:4px 0">
+      <sc-for list="{{ marquee }}" as="m" hint-placeholder-count="10">
+        <div style="height:84px;min-width:200px;padding:0 26px;border:1px solid #EBEBEB;border-radius:15px;background:#FAFAFA;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">
+          <sc-if value="{{ m.hasSrc }}" hint-placeholder-val="{{ false }}"><div style="height:56px;width:150px;display:flex;align-items:center;justify-content:center"><img src="{{ m.src }}" alt="{{ m.name }}" width="88" height="88" style="max-height:56px;max-width:88px;width:auto;height:auto;object-fit:contain;display:block"></div></sc-if><sc-if value="{{ m.noSrc }}" hint-placeholder-val="{{ true }}"><span style="font-size:17px;font-weight:700;color:#5E7070;white-space:nowrap">{{ m.name }}</span><sc-if value="{{ showPlaceholderLabels }}"><span style="font-family:ui-monospace,Menlo,monospace;font-size:9px;color:#7A8A8A">{{ m.file }}</span></sc-if></sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="max-width:1430px;margin:0 auto;padding:0 clamp(16px,5.2vw,75px)">
+    <div data-reveal="" style="margin-top:40px;max-width:880px;margin-left:auto;margin-right:auto;background:#FFFFFF;border:1px solid #EBEBEB;border-radius:20px;padding:clamp(18px,3vw,32px);display:flex;flex-direction:column;gap:22px">
+      <div role="tablist" aria-label="Zonas" style="display:flex;flex-wrap:wrap;gap:8px">
+        <sc-for list="{{ zonas }}" as="z" hint-placeholder-count="4">
+          <button type="button" role="tab" aria-selected="{{ z.selected }}" onClick="{{ z.onClick }}" style="font-family:inherit;flex:none;font-size:16px;font-weight:700;padding:10px 20px;border-radius:100px;cursor:pointer;transition:background .3s ease,color .3s ease;background:{{ z.bg }};color:{{ z.color }};border:1px solid {{ z.bd }}">{{ z.label }}</button>
+        </sc-for>
+      </div>
+      <sc-if value="{{ isCaba }}" hint-placeholder-val="{{ true }}"><ul role="tabpanel" style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:10px">
+        <sc-for list="{{ zonaItems }}" as="n" hint-placeholder-count="8">
+          <li style="display:flex;align-items:center;gap:10px;font-size:16px;color:#077B7A;padding:12px 14px;background:#EFF8F8;border-radius:15px"><span style="width:7px;height:7px;flex:none;border-radius:50%;background:#10A6A4"></span>{{ n }}</li>
+        </sc-for>
+        <li style="display:flex;align-items:center;font-size:16px;font-weight:700;color:#10A6A4;padding:12px 14px">y muchos más</li>
+      </ul></sc-if><sc-if value="{{ notCaba }}" hint-placeholder-val="{{ false }}"><div role="tabpanel" style="background:#EFF8F8;border-radius:15px;padding:clamp(22px,3vw,32px);display:flex;flex-direction:column;align-items:flex-start;gap:16px"><p style="margin:0;font-size:clamp(22px,2.2vw,26px);line-height:1.15;font-weight:500;letter-spacing:-0.015em;color:#077B7A">Pedí la cartilla de tu zona</p><a href="{{ waZona }}" target="_blank" rel="noopener" onClick="{{ trkZona }}" style="display:inline-flex;align-items:center;gap:10px;background:#10A6A4;color:#FFFFFF;font-weight:700;font-size:17px;padding:13px 22px;border-radius:15px;text-decoration:none;transition:transform .3s ease" style-hover="transform:translateY(-2px);color:#FFFFFF"><svg width="20" height="20" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>Pedir por WhatsApp</a></div></sc-if>
+      <sc-if value="{{ isCaba }}" hint-placeholder-val="{{ true }}"><div style="display:flex;justify-content:flex-end;border-top:1px solid #EBEBEB;padding-top:20px">
+        <a href="{{ waCartilla }}" target="_blank" rel="noopener" onClick="{{ trkCartilla }}" style="display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;border:1px solid #EBEBEB;color:#10A6A4;font-weight:700;font-size:17px;padding:13px 22px;border-radius:15px;text-decoration:none;transition:transform .3s ease" style-hover="transform:translateY(-2px);color:#10A6A4"><svg width="20" height="20" viewBox="0 0 24 24" fill="#10A6A4" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>Pedir la cartilla completa</a>
+      </div></sc-if>
+    </div>
+  </div>
+</section>
+
+<section id="preguntas" style="background:linear-gradient(180deg,#EFF8F8 0%,#FFFFFF 100%);padding:clamp(56px,7vw,104px) 0;content-visibility:auto;contain-intrinsic-size:auto 640px">
+  <div style="max-width:1430px;margin:0 auto;padding:0 clamp(16px,5.2vw,75px)">
+    <div style="max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:32px">
+      <h2 data-reveal="" style="margin:0;text-align:center;font-size:clamp(34px,4.4vw,56px);line-height:.95;font-weight:500;letter-spacing:-0.03em;color:#077B7A">Preguntas frecuentes</h2>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="5">
+          <div data-reveal="" style="background:#FFFFFF;border:1px solid #EBEBEB;border-radius:20px;overflow:hidden">
+            <h3 style="margin:0">
+              <button type="button" aria-expanded="{{ f.expanded }}" onClick="{{ f.onClick }}" style="width:100%;font-family:inherit;background:none;border:0;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;text-align:left;padding:20px 22px;font-size:clamp(17px,1.6vw,19px);font-weight:500;color:#077B7A">
+                <span>{{ f.q }}</span>
+                <span style="width:32px;height:32px;flex:none;border-radius:50%;background:#D9F1F0;display:flex;align-items:center;justify-content:center;transition:transform .3s ease;transform:rotate({{ f.rot }})"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10A6A4" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+              </button>
+            </h3>
+            <div style="display:grid;transition:grid-template-rows .35s cubic-bezier(.22,1,.36,1);grid-template-rows:{{ f.rows }}">
+              <div style="overflow:hidden">
+                <p style="margin:0;padding:0 22px 22px;font-size:16px;line-height:1.55;color:#5E7070;text-wrap:pretty">{{ f.a }}</p>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-label="Hablá con un asesor" style="padding:clamp(48px,6vw,88px) 0">
+  <div style="max-width:1430px;margin:0 auto;padding:0 clamp(16px,5.2vw,75px)">
+    <div data-reveal="" ref="{{ ctaRef }}" style="background:linear-gradient(135deg,#10A6A4 0%,#077B7A 100%);border-radius:32px;padding:clamp(36px,6vw,80px) clamp(22px,5vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:28px">
+      <h2 style="margin:0;font-size:clamp(32px,4.2vw,56px);line-height:.98;font-weight:500;letter-spacing:-0.03em;color:#FFFFFF;max-width:820px;text-wrap:balance">Hablá con un asesor y elegí el plan ideal para vos y tu familia</h2>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;width:100%">
+        <a href="{{ waGeneral }}" target="_blank" rel="noopener" onClick="{{ trkCta }}" style="display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;color:#005857;font-weight:700;font-size:18px;padding:14px 26px;border-radius:15px;text-decoration:none;transition:transform .3s ease" style-hover="transform:translateY(-2px);color:#005857"><svg width="20" height="20" viewBox="0 0 24 24" fill="#005857" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>Hablar por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer data-enter="move" style="background:#FAFAFA;border-top:1px solid #EBEBEB;padding:56px 0 {{ footerPb }}">
+  <div style="max-width:1430px;margin:0 auto;padding:0 clamp(16px,5.2vw,75px);display:flex;flex-direction:column;gap:36px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:32px">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <sc-if value="{{ hasLogo }}" hint-placeholder-val="{{ false }}"><img src="{{ logoSrc }}" alt="Premedic" width="304" height="56" class="pm-logo-footer" style="height:{{ logoFooterH }};width:auto;aspect-ratio:255/47;display:block;object-fit:contain;align-self:flex-start"></sc-if><sc-if value="{{ noLogo }}" hint-placeholder-val="{{ true }}"><span style="font-weight:700;font-size:26px;letter-spacing:-0.04em;color:#10A6A4">premedic</span></sc-if>
+        <span style="font-size:15px;font-weight:500;color:#077B7A">Agencia Comercial Oficial de Grupo Premedic</span>
+        <span style="font-size:14px;line-height:1.5;color:#7A8A8A">{{ agencia }}</span>
+      </div>
+      <nav aria-label="Pie de página" style="display:flex;flex-direction:column;gap:10px">
+        <span style="font-size:13px;font-weight:700;letter-spacing:.12em;color:#7A8A8A">SECCIONES</span>
+        <a href="#planes" style="color:#077B7A;text-decoration:none;font-size:16px">Planes</a>
+        <a href="#beneficios" style="color:#077B7A;text-decoration:none;font-size:16px">Beneficios</a>
+        <a href="#prestadores" style="color:#077B7A;text-decoration:none;font-size:16px">Prestadores</a>
+        <a href="#preguntas" style="color:#077B7A;text-decoration:none;font-size:16px">Preguntas</a>
+      </nav>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span style="font-size:13px;font-weight:700;letter-spacing:.12em;color:#7A8A8A">CONTACTO</span>
+        <a href="{{ waGeneral }}" target="_blank" rel="noopener" onClick="{{ trkFooter }}" style="display:flex;align-items:center;gap:8px;color:#077B7A;text-decoration:none;font-size:16px;font-weight:500"><svg width="18" height="18" viewBox="0 0 24 24" fill="#6ABD6E" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>WhatsApp {{ waDisplay }}</a>
+        <a href="tel:08108883226" style="color:#077B7A;text-decoration:none;font-size:16px">Urgencias: 0810-888-3226</a>
+        <a href="tel:08102225522" style="color:#077B7A;text-decoration:none;font-size:16px">Atención al cliente: 0810-222-5522</a>
+      </div>
+    </div>
+    <div style="border-top:1px solid #EBEBEB;padding-top:24px;display:flex;flex-direction:column;gap:12px">
+      <p style="margin:0;font-size:13px;line-height:1.6;color:#6B7B7B;max-width:980px">Grupo PreMedic – Medicina Privada (Grupo DDM S.A.). Superintendencia de Servicios de Salud, Órgano de Control de Obras Sociales y Entidades de Medicina Prepaga, 0800-222-SALUD (72583), www.sssalud.gob.ar. RNEMP Nº {{ rnemp }}.</p>
+      <p style="margin:0;font-size:13px;line-height:1.6;color:#6B7B7B">Planes, beneficios y condiciones sujetos a actualización. Consultá vigencia con un asesor.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:20px">
+        <a href="https://www.argentina.gob.ar/defensadelconsumidor" target="_blank" rel="noopener" style="font-size:13px;font-weight:700">Defensa del Consumidor</a>
+        <a href="{{ privacyUrl }}" style="font-size:13px;font-weight:700">Política de privacidad</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div data-enter="fade" style="position:fixed;right:16px;z-index:46;display:flex;flex-direction:column;gap:10px;transition:bottom .3s ease;bottom:{{ floatBottom }}">
+  <sc-if value="{{ showFloatWa }}" hint-placeholder-val="{{ true }}"><a href="{{ igUrl }}" target="_blank" rel="noopener" aria-label="Instagram" style="width:52px;height:52px;border-radius:50%;background:#FFFFFF;border:1px solid #EBEBEB;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,.04);transition:transform .3s ease" style-hover="transform:translateY(-2px)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10A6A4" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1.2" fill="#10A6A4" stroke="none"></circle></svg></a></sc-if>
+  <sc-if value="{{ showFloatWa }}" hint-placeholder-val="{{ true }}">
+    <a href="{{ waGeneral }}" target="_blank" rel="noopener" onClick="{{ trkFloat }}" aria-label="Escribinos por WhatsApp" style="width:56px;height:56px;border-radius:50%;background:#6ABD6E;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,.04);transition:transform .3s ease" style-hover="transform:translateY(-2px)"><svg width="26" height="26" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg></a>
+  </sc-if>
+  <sc-if value="{{ showFloatWa }}" hint-placeholder-val="{{ true }}"><a href="tel:08108883226" aria-label="Urgencias médicas: 0810-888-3226" style="width:52px;height:52px;border-radius:50%;background:#EC7A2C;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,.04);transition:transform .3s ease" style-hover="transform:translateY(-2px)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a></sc-if>
+</div>
+
+<sc-if value="{{ mobBar }}" hint-placeholder-val="{{ false }}">
+  <div data-enter="fade" style="position:fixed;left:0;right:0;bottom:0;z-index:45;background:#FFFFFF;border-top:1px solid #EBEBEB;padding:12px 16px calc(12px + env(safe-area-inset-bottom));transition:opacity .4s ease,transform .4s ease;opacity:{{ barOp }};transform:{{ barTf }};pointer-events:{{ barPe }}">
+    <div style="display:flex;gap:10px"><a href="{{ waGeneral }}" target="_blank" rel="noopener" onClick="{{ trkMobBar }}" tabindex="{{ barTab }}" style="flex:1;display:flex;align-items:center;justify-content:center;gap:10px;background:#6ABD6E;color:#FFFFFF;font-weight:700;font-size:18px;padding:15px 20px;border-radius:15px;text-decoration:none"><svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>Cotizar por WhatsApp</a><a href="tel:08108883226" tabindex="{{ barTab }}" aria-label="Urgencias médicas: 0810-888-3226" style="width:56px;flex:none;border-radius:15px;background:#EC7A2C;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a></div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ hasPlanModal }}" hint-placeholder-val="{{ false }}">
+  <div class="pm-modal-overlay" onClick="{{ onOverlayClick }}" role="dialog" aria-modal="true" aria-labelledby="pm-modal-title">
+    <div class="pm-modal-card">
+      <button type="button" data-pm-modal-close="" aria-label="Cerrar" onClick="{{ closePlanModal }}" style="position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%;border:1px solid #EBEBEB;background:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s ease;padding:0;z-index:10" style-hover="transform:scale(1.06)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#077B7A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div style="display:flex;flex-direction:column;gap:4px;padding-right:48px">
+        <span style="font-size:12px;font-weight:700;letter-spacing:.16em;color:#10A6A4">PLAN</span>
+        <h3 id="pm-modal-title" style="margin:0;font-size:32px;line-height:1;font-weight:500;letter-spacing:-0.02em;color:#077B7A">{{ modalPlan.name }}</h3>
+      </div>
+
+      <p style="margin:0;font-size:16px;line-height:1.45;color:#4F6B6B">{{ modalPlan.resumen }}</p>
+
+      <sc-if value="{{ modalPlan.hasInherit }}" hint-placeholder-val="{{ false }}">
+        <p style="margin:0;font-size:14px;line-height:1.4;font-weight:500;color:#077B7A">{{ modalPlan.inheritText }}</p>
+      </sc-if>
+
+      <div style="display:flex;flex-direction:column;gap:12px;border-top:1px solid #EBEBEB;padding-top:16px">
+        <h4 style="margin:0;font-size:17px;font-weight:700;color:#077B7A">Qué incluye</h4>
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{ modalPlan.detalle }}" as="it" hint-placeholder-count="5">
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.35;color:#5E7070">
+              <span style="width:20px;height:20px;flex:none;border-radius:50%;background:#D9F1F0;display:flex;align-items:center;justify-content:center;margin-top:1px">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#10A6A4" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </span>
+              {{ it }}
+            </li>
+          </sc-for>
+        </ul>
+      </div>
+
+      <sc-if value="{{ modalPlan.hasNota }}" hint-placeholder-val="{{ false }}">
+        <p style="margin:0;font-size:13px;line-height:1.45;color:#7A8A8A;background:#EFF8F8;padding:12px 16px;border-radius:12px;border:1px solid #E3F4F3">{{ modalPlan.nota }}</p>
+      </sc-if>
+
+      <div style="margin-top:8px;padding-top:12px;border-top:1px solid #EBEBEB">
+        <a href="{{ modalPlan.href }}" target="_blank" rel="noopener" onClick="{{ modalPlan.onClick }}" style="display:flex;justify-content:center;background:#10A6A4;color:#FFFFFF;font-weight:700;font-size:17px;padding:14px 20px;border-radius:15px;text-decoration:none;transition:transform .3s ease,box-shadow .3s ease" style-hover="transform:translateY(-2px);box-shadow:0 2px 4px rgba(0,0,0,.04);color:#FFFFFF">Cotizar este plan</a>
+      </div>
+    </div>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+// ============================================================
+// ===== CONFIGURACIÓN — todo lo editable está en este bloque =====
+// ============================================================
+const WHATSAPP_NUMBER = '549XXXXXXXXXX';   // [CONFIRMAR] 549 + código de área + número, sin espacios
+const WHATSAPP_DISPLAY = '11 XXXX-XXXX';   // [CONFIRMAR] número como se muestra en pantalla
+const WHATSAPP_HOURS = 'Lun a vie 9 a 18 hs'; // [CONFIRMAR] horario de atención
+const INSTAGRAM_URL = 'https://www.instagram.com/'; // [CONFIRMAR]
+const SHOW_APP_BLOCK = false;               // true = muestra contenido de App Premedic Móvil (app, tiendas)
+const SHOW_PLAN_TRANSPORTE = false;         // true = muestra la tarjeta "Plan Transporte público" en el carrusel
+const SHOW_PLACEHOLDER_LABELS = false;      // true = muestra los nombres de archivo de los placeholders vacíos
+const PRIVACY_URL = '#';                   // [CONFIRMAR] link a política de privacidad
+const AGENCIA_DATOS = 'Razón social de la agencia · CUIT 00-00000000-0 · Matrícula 0000'; // [CONFIRMAR razón social y matrícula]
+const RNEMP = '112172';                    // [CONFIRMAR]
+const HERO_TITLE = 'El respaldo que te merecés'; // [CONFIRMAR]
+
+// ----- IMÁGENES: completá la ruta y el placeholder se reemplaza solo (vacío = placeholder) -----
+const ASSETS = {
+  logo: 'assets/logo-premedic.png',
+  heroFamilia: 'assets/hero-familia.mp4',    // imagen o video (.mp4 usa <video>); vacío = patrón rayado
+  heroPareja: 'assets/hero-pareja.mp4',
+  heroMascota: 'assets/hero-mascota.mp4',    // [CONFIRMAR CON CLIENTE]
+  heroCuidados: 'assets/hero-cuidados.avif',
+  destMedicoOnline: 'assets/destacado-medico-online.avif',
+  destVeterinaria: 'assets/destacado-veterinaria.avif',
+  planAportes: 'assets/plan-aportes.avif',
+  plan200: 'assets/plan-200.avif',
+  plan300: 'assets/plan-300.avif',
+  plan400: 'assets/plan-400.avif',
+  planTransporte: '',     // assets/plan-transporte.webp
+  benMedicoOnline: 'assets/beneficio-medico-online.avif',
+  benOdontologia: 'assets/beneficio-odontologia.avif',
+  benFarmacias: '',       // sin foto oficial, degradé turquesa con cruz
+  benViajero: 'assets/beneficio-viajero.avif',
+  benVeterinaria: 'assets/beneficio-veterinaria.jpg',
+  benBienestar: 'assets/beneficio-bienestar.avif',
+  logoBazterrica: 'assets/logo-clinica-bazterrica.avif',
+  logoSarmiento: 'assets/logo-sanatorio-general-sarmiento.avif',
+  logoColegiales: 'assets/logo-sanatorio-colegiales.avif',
+  logoSanCamilo: 'assets/logo-clinica-san-camilo.avif',
+  logoDiagnosticoMedico: 'assets/logo-diagnostico-medico.avif',
+};
+
+// Franja de cifras — [CONFIRMAR CON CLIENTE] (la web oficial menciona "+200 clínicas y sanatorios" y "+1000 centros médicos y profesionales")
+const CIFRAS = [
+  { pre: '+', value: 200, suf: '', label: 'Clínicas y sanatorios' }, // [CONFIRMAR CON CLIENTE]
+  { pre: '+', value: 1000, suf: '', label: 'Centros médicos y profesionales' }, // [CONFIRMAR CON CLIENTE]
+  { pre: '', value: 24, suf: ' hs', label: 'Médico por videollamada' },
+  { pre: '', value: 7, suf: '', label: 'Centros odontológicos propios' },
+];
+
+// ----- Mensajes de WhatsApp -----
+const MSG_GENERAL = 'Hola, necesito asesoramiento sobre los planes de Premedic.';
+const MSG_ASOCIARTE = {
+  dep: 'Hola, quiero asociarme a Premedic con recibo de sueldo (relación de dependencia).',
+  mono: 'Hola, soy monotributista y quiero información sobre los planes de Premedic.',
+  auto: 'Hola, quiero información sobre los planes de Premedic como autónomo o particular.',
+  emp: 'Hola, quiero información sobre planes de Premedic para mi empresa.', // [CONFIRMAR si aplica]
+};
+
+// ----- Planes (escalera). Niveles y herencia: [CONFIRMAR] -----
+const NOTA_PLANES = 'Los alcances y condiciones los confirma un asesor según tu situación.'; // [CONFIRMAR CON CLIENTE]
+const PLANES = [
+  {
+    name: 'Por aportes',
+    level: 1,
+    asset: 'planAportes',
+    sub: 'Solo con tu aporte de obra social',
+    resumen: 'Si tenés recibo de sueldo, accedés a la cobertura sin pagar cuota mensual: usás tus aportes.', // [CONFIRMAR CON CLIENTE]
+    points: [
+      'Clínicas y sanatorios de primer nivel',
+      'Médico por videollamada 24 hs',
+      'Red odontológica propia',
+      'Descuentos en farmacias',
+    ],
+    detalle: [
+      'Más de 200 clínicas y sanatorios',
+      'Más de 1.000 centros médicos y profesionales',
+      'Sin cuota mensual: solo con tu aporte, con cobertura integral',
+      'Centros médicos propios',
+      'Red odontológica propia',
+      'Médico por videollamada',
+      'Médico a domicilio sin cargo',
+      'Descuentos en una amplia red de farmacias',
+      'Sin coseguros en consultas pediátricas, clínicas y ginecológicas',
+      'Asistencia al viajero: cobertura nacional y países limítrofes',
+      'Anticonceptivos a domicilio',
+    ], // [CONFIRMAR CON CLIENTE]
+    nota: 'Requiere recibo de sueldo.', // [CONFIRMAR CON CLIENTE]
+    msg: 'Hola, quiero información sobre el Plan por Aportes de Premedic. Tengo recibo de sueldo.'
+  },
+  {
+    name: '200',
+    level: 2,
+    inherit: 'Plan por aportes',
+    asset: 'plan200',
+    sub: 'Equilibrio entre precio y prestaciones',
+    resumen: 'Más beneficios, mismo cuidado: mayor acceso a especialidades, centros médicos y estudios, a un precio accesible para vos y tu familia.', // [CONFIRMAR CON CLIENTE]
+    points: [
+      'Amplia cartilla médica',
+      'Centros médicos propios con turnos a corto plazo', // [CONFIRMAR CON CLIENTE] "turnos a corto plazo"
+      'Sin coseguros en pediatría, clínica y ginecología', // [CONFIRMAR CON CLIENTE] coseguros en Plan 200 (la web lo indica para Por aportes)
+    ],
+    detalle: [
+      'Habitación de internación compartida',
+      'Amplia cartilla en CABA, provincia de Buenos Aires, Córdoba, Tucumán, Misiones y Mendoza',
+      'Centros médicos propios',
+      'Red odontológica propia',
+      'Médico por videollamada',
+      'Médico a domicilio sin cargo',
+      'Programa de Bienestar',
+      'Descuentos en una amplia red de farmacias',
+      'Plan con coseguros, excepto en guardias y consultas pediátricas, clínicas y de ginecología',
+      'Asistencia al viajero: cobertura nacional y países limítrofes',
+      'Anticonceptivos a domicilio',
+    ], // [CONFIRMAR CON CLIENTE]
+    nota: 'Los alcances y condiciones los confirma un asesor según tu situación.', // [CONFIRMAR CON CLIENTE]
+    msg: 'Hola, quiero cotizar el Plan 200 de Premedic'
+  },
+  {
+    name: '300',
+    level: 3,
+    inherit: 'Plan 200',
+    hot: true,
+    asset: 'plan300',
+    sub: 'Cobertura con la red de prestadores más amplia',
+    resumen: 'Equilibrio justo entre cobertura y precio: amplia cartilla, más prácticas cubiertas y atención en centros de primer nivel.', // [CONFIRMAR CON CLIENTE]
+    points: [
+      'Atención en centros de primer nivel', // [CONFIRMAR CON CLIENTE]
+      'Asistencia al viajero nacional y países limítrofes', // [CONFIRMAR CON CLIENTE]
+    ],
+    detalle: [
+      'Habitación de internación compartida',
+      'Amplia cartilla en CABA, provincia de Buenos Aires, Córdoba, Tucumán, Misiones y Mendoza',
+      'Centros médicos propios',
+      'Red odontológica propia',
+      'Médico por videollamada',
+      'Médico a domicilio sin cargo',
+      'Programa de Bienestar',
+      'Descuentos en una amplia red de farmacias',
+      'Asistencia al viajero: cobertura nacional y países limítrofes',
+      'Anticonceptivos a domicilio',
+    ], // [CONFIRMAR CON CLIENTE]
+    nota: 'Los alcances y condiciones los confirma un asesor según tu situación.', // [CONFIRMAR CON CLIENTE]
+    msg: 'Hola, quiero cotizar el Plan 300 de Premedic'
+  },
+  {
+    name: '400',
+    level: 4,
+    inherit: 'Plan 300',
+    asset: 'plan400',
+    sub: 'Cobertura premium',
+    resumen: 'Alta cobertura y amplios servicios: internación en clínicas de alta calidad, más estudios, tratamientos especiales y amplia red de prestadores.', // [CONFIRMAR CON CLIENTE]
+    points: [
+      'Internación en habitación individual', // [CONFIRMAR CON CLIENTE]
+      'Cobertura en internación y cirugía (según PMO)', // [CONFIRMAR CON CLIENTE]
+      'Descuentos en implantes, ortodoncia y estética dental', // [CONFIRMAR CON CLIENTE]
+    ],
+    detalle: [
+      'Habitación individual',
+      'Más de 5.000 sanatorios, centros médicos y profesionales de acceso directo en CABA, provincia de Buenos Aires, Córdoba, Tucumán, Misiones y Mendoza',
+      'Cobertura en internación y cirugía (según PMO)',
+      'Centros médicos propios',
+      'Red odontológica propia',
+      'Descuentos en implantes, ortodoncia y estética dental',
+      'Médico por videollamada',
+      'Médico a domicilio sin cargo',
+      'Programa de Bienestar',
+      'Descuentos en una amplia red de farmacias',
+      'Asistencia al viajero: cobertura nacional y países limítrofes',
+      'Anticonceptivos a domicilio',
+    ], // [CONFIRMAR CON CLIENTE]
+    nota: 'Los alcances y condiciones los confirma un asesor según tu situación.', // [CONFIRMAR CON CLIENTE]
+    msg: 'Hola, quiero cotizar el Plan 400 de Premedic'
+  },
+  { name: 'Transporte público', soon: true, asset: 'planTransporte', sub: 'Descripción a definir', points: ['Beneficio a definir', 'Beneficio a definir', 'Beneficio a definir', 'Beneficio a definir'], msg: 'Hola, quiero cotizar el Plan Transporte público de Premedic' },
+];
+const PASOS = [
+  { title: 'Escribinos por WhatsApp', text: 'Contanos tu situación y qué buscás.' },
+  { title: 'Te recomendamos un plan', text: 'Según tu zona, edad y grupo familiar.' },
+  { title: 'Hacemos el alta con vos', text: 'Te acompañamos en el trámite.' }, // [CONFIRMAR proceso]
+];
+const DESTACADOS = [
+  { title: 'Un médico en tu celular las 24 hs', asset: 'destMedicoOnline', key: 'Médico online 24 hs' },
+  { title: 'Veterinaria a domicilio incluida', asset: 'destVeterinaria', key: 'Veterinaria a domicilio' },
+];
+const BENEFICIOS = [
+  { title: 'Médico online 24 hs', desc: 'Consultas por videollamada, cuando lo necesites.', asset: 'benMedicoOnline' },
+  { title: 'Red odontológica propia', desc: 'Atención en Smile Group, con turnos ágiles.', asset: 'benOdontologia' }, // [CONFIRMAR CON CLIENTE] "turnos ágiles"
+  { title: 'Descuentos en farmacias', desc: 'Beneficios en Farmacity en tus medicamentos.', asset: 'benFarmacias' }, // [CONFIRMAR CON CLIENTE] alcance del descuento
+  { title: 'Asistencia al viajero', desc: 'Cobertura para tus viajes en el país y el exterior.', asset: 'benViajero' }, // [CONFIRMAR CON CLIENTE] la web indica "nacional y países limítrofes"
+  { title: 'Veterinaria a domicilio', desc: 'Atención para tu mascota sin salir de casa.', asset: 'benVeterinaria', violet: true },
+  { title: 'Premedic Bienestar', desc: 'Psicología, nutrición y más por videollamada.', asset: 'benBienestar' },
+];
+// ----- Prestadores -----
+// Logos tomados de la cartilla oficial (web.grupopremedic.com.ar/cartilla-medica). Hay 7 logos más sin nombre legible: [CONFIRMAR CON CLIENTE]
+const PRESTADORES_LOGOS = [
+  { name: 'Clínica Bazterrica', asset: 'logoBazterrica' },
+  { name: 'Sanatorio General Sarmiento', asset: 'logoSarmiento' },
+  { name: 'Sanatorio Colegiales', asset: 'logoColegiales' },
+  { name: 'Clínica San Camilo', asset: 'logoSanCamilo' },
+  { name: 'Diagnóstico Médico', asset: 'logoDiagnosticoMedico' },
+];
+// CABA: prestadores de la cartilla oficial + centros propios mencionados en la web. [CONFIRMAR CON CLIENTE]
+const PRESTADORES_CABA = ['Clínica Bazterrica', 'Clínica San Camilo', 'Sanatorio Colegiales', 'Diagnóstico Médico', 'Premedic Medical Center (PMC)', 'Centros odontológicos Smile Group', 'Multidiagnóstico'];
+const ZONA_TABS = ['CABA', 'Norte', 'Sur', 'Oeste'];
+const ZONA_NOMBRE = { CABA: 'CABA', Norte: 'Zona Norte', Sur: 'Zona Sur', Oeste: 'Zona Oeste' };
+// Preguntas frecuentes — ninguna respuesta sale de la web oficial: todas [CONFIRMAR CON CLIENTE]
+const FAQS = [
+  { q: '¿Qué necesito para asociarme con mis aportes?', a: 'En general, tu DNI, tu último recibo de sueldo y completar el formulario de opción de cambio de obra social. Un asesor te guía en todo el trámite.' }, // [CONFIRMAR CON CLIENTE] requisitos
+  { q: '¿Los monotributistas pueden afiliarse?', a: 'Sí, podés derivar tus aportes del monotributo y, según el plan, abonar una diferencia. Te explicamos las opciones según tu categoría.' }, // [CONFIRMAR CON CLIENTE] derivación y diferencia
+  { q: '¿Hay carencia en urgencias?', a: 'Las urgencias y emergencias médicas tienen cobertura desde el alta. Algunas prestaciones programadas pueden tener plazos de espera según el plan.' }, // [CONFIRMAR CON CLIENTE] carencias
+  { q: '¿Cómo se paga?', a: 'Si te asociás por aportes, se descuentan de tu recibo. Las diferencias o planes directos se pueden abonar con débito automático o tarjeta.' }, // [CONFIRMAR CON CLIENTE] medios de pago
+  { q: '¿Qué cobertura hay en medicamentos?', a: 'Todos los planes incluyen la cobertura que establece el PMO, más descuentos adicionales en farmacias adheridas. El porcentaje varía según el plan.' }, // [CONFIRMAR CON CLIENTE] descuentos en medicamentos
+];
+
+function trackWhatsAppClick(origen) {
+  // Conectar Meta Pixel acá, ej: fbq('track', 'Contact', { origen });
+}
+// ===== FIN DE CONFIGURACIÓN =====
+
+const wa = (msg) => 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
+const ASSET_FILE = {
+  logo: 'logo-premedic.png', heroFamilia: 'hero-familia.mp4', heroPareja: 'hero-pareja.mp4', heroMascota: 'hero-mascota.mp4', heroCuidados: 'hero-cuidados.avif',
+  destMedicoOnline: 'destacado-medico-online.webp', destVeterinaria: 'destacado-veterinaria.webp',
+  planAportes: 'plan-aportes.webp', plan200: 'plan-200.webp', plan300: 'plan-300.webp', plan400: 'plan-400.webp', planTransporte: 'plan-transporte.webp',
+  benMedicoOnline: 'beneficio-medico-online.webp', benOdontologia: 'beneficio-odontologia.webp', benFarmacias: 'beneficio-farmacias.webp',
+  benViajero: 'beneficio-viajero.webp', benVeterinaria: 'beneficio-veterinaria.webp · corazón con perro y gato', benBienestar: 'beneficio-bienestar.webp',
+  logoBazterrica: 'logo-clinica-bazterrica.avif', logoSarmiento: 'logo-sanatorio-general-sarmiento.avif', logoColegiales: 'logo-sanatorio-colegiales.avif', logoSanCamilo: 'logo-clinica-san-camilo.avif', logoDiagnosticoMedico: 'logo-diagnostico-medico.avif',
+};
+const ASSET_BG = {}, ASSET_LABEL = {};
+Object.keys(ASSET_FILE).forEach(k => {
+  ASSET_BG[k] = ASSETS[k] ? `url("${ASSETS[k]}") center/cover no-repeat,` : '';
+  ASSET_LABEL[k] = ASSETS[k] || !SHOW_PLACEHOLDER_LABELS ? '' : ASSET_FILE[k];
+});
+
+class Component extends DCLogic {
+  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1440, menuOpen: false, tick: 0, zona: 'CABA', faq: -1, heroOut: false, ctaIn: false, planModal: -1 };
+  destRef = React.createRef(); planRef = React.createRef(); benRef = React.createRef();
+  marqueeRef = React.createRef(); marqueeWrapRef = React.createRef(); heroRef = React.createRef(); ctaRef = React.createRef();
+  heroVis = true;
+
+  componentDidMount() {
+    document.documentElement.lang = 'es-AR';
+    this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('resize', this.onResize);
+    this.onKey = e => {
+      if (this.state.planModal < 0) return;
+      if (e.key === 'Escape') { e.preventDefault(); this.closePlanModal(); return; }
+      if (e.key === 'Tab') {
+        const box = document.querySelector('.pm-modal-card'); if (!box) return;
+        const f = [...box.querySelectorAll('a[href],button:not([disabled])')];
+        if (!f.length) return;
+        const first = f[0], last = f[f.length - 1];
+        if (!box.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+        else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    };
+    document.addEventListener('keydown', this.onKey);
+    this.hideWords();
+    if (!this.reduced) this.timer = setInterval(() => {
+      if (this.heroVis && !document.hidden) this.setState(s => ({ tick: s.tick + 1 }));
+    }, 1000);
+    this.boot();
+  }
+  boot() {
+    // Sin espera artificial: sale apenas React montó y la tipografía cargó. Tope: 1.5 s desde el inicio de la carga.
+    const loader = document.querySelector('[data-pm-loader]');
+    if (loader) document.documentElement.setAttribute('data-pm-boot', '');
+    const cap = new Promise(r => setTimeout(r, Math.max(0, 1500 - performance.now())));
+    const fonts = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+    let done = false;
+    const go = () => { if (!done) { done = true; this.reveal(loader); } };
+    Promise.race([fonts, cap]).then(go, go);
+  }
+  reveal(loader) {
+    const r = this.reduced, ease = 'cubic-bezier(.22,1,.36,1)';
+    const enter = () => {
+      if (loader) loader.style.display = 'none';
+      document.documentElement.removeAttribute('data-pm-boot');
+      document.querySelectorAll('[data-enter]').forEach(el => {
+        if (!el.animate) return;
+        const move = el.dataset.enter === 'move' && !r;
+        el.animate([move ? { opacity: 0, transform: 'translateY(12px)' } : { opacity: 0 }], { duration: r ? 200 : 400, easing: ease });
+      });
+      setTimeout(() => this.startWords(), 120);
+      setTimeout(() => {
+        this.setupReveal(); this.setupDrag(); this.setupMarquee(); this.setupCounters();
+        this.setupSeq(); this.setupTilt(); this.setupWatchers();
+      }, 60);
+    };
+    if (!loader || !loader.animate) return enter();
+    loader.style.pointerEvents = 'none';
+    const a = loader.animate([{ opacity: 1 }, { opacity: 0 }], { duration: r ? 150 : 300, easing: 'ease-out', fill: 'forwards' });
+    let fired = false; const once = () => { if (!fired) { fired = true; enter(); } };
+    a.onfinish = once; setTimeout(once, 500);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
+    document.removeEventListener('keydown', this.onKey);
+    document.body.style.overflow = '';
+    document.removeEventListener('visibilitychange', this.onVis);
+    clearInterval(this.timer);
+    (this.observers || []).forEach(o => o.disconnect());
+    this.anim && this.anim.cancel();
+  }
+  // Panel "Ver más detalles" (overlay con role="dialog"; <dialog>/showModal choca con el runtime de .dc.html)
+  planList() { return PLANES.filter(p => SHOW_PLAN_TRANSPORTE || p.name !== 'Transporte público'); }
+  openPlanModal(i, e) {
+    this.pmOrigin = (e && e.currentTarget) || document.activeElement;
+    this.setState({ planModal: i });
+  }
+  closePlanModal() { this.setState({ planModal: -1 }); }
+  componentDidUpdate(_, prev) {
+    if (this.heroReady) this.attachVids();
+    const open = this.state.planModal >= 0, was = prev.planModal >= 0;
+    if (open === was) return;
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) {
+      requestAnimationFrame(() => { const b = document.querySelector('[data-pm-modal-close]'); if (b) b.focus(); });
+    } else if (this.pmOrigin && document.contains(this.pmOrigin)) {
+      this.pmOrigin.focus(); this.pmOrigin = null;
+    }
+  }
+  obs(cb, opts) { const o = new IntersectionObserver(cb, opts); (this.observers = this.observers || []).push(o); return o; }
+
+  hideWords() {
+    if (this.reduced) return;
+    const words = document.querySelectorAll('[data-word]');
+    words.forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(12px)'; });
+    if (words[0]) void words[0].offsetWidth;
+  }
+  startWords() {
+    if (this.reduced) return;
+    const words = document.querySelectorAll('[data-word]');
+    setTimeout(() => words.forEach((el, i) => {
+      const d = (i % 8) * 70;
+      el.style.transition = `opacity .5s cubic-bezier(.22,1,.36,1) ${d}ms, transform .5s cubic-bezier(.22,1,.36,1) ${d}ms`;
+      el.style.opacity = '1'; el.style.transform = 'none';
+    }), 40);
+  }
+  setupReveal() {
+    if (this.reduced || !('IntersectionObserver' in window)) return;
+    const ease = 'cubic-bezier(.22,1,.36,1)';
+    const io = this.obs((entries) => {
+      let i = 0;
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target, d = (i++) * 80;
+        el.style.transition = `opacity .6s ${ease} ${d}ms, transform .6s ${ease} ${d}ms`;
+        el.style.opacity = '1'; el.style.transform = 'none';
+        io.unobserve(el);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('[data-reveal]').forEach(el => {
+      el.style.opacity = '0'; el.style.transform = 'translateY(24px)'; io.observe(el);
+    });
+  }
+  setupCounters() {
+    const wrap = document.querySelector('[data-counters]');
+    if (!wrap || this.reduced || !('IntersectionObserver' in window)) return;
+    const els = [...wrap.querySelectorAll('[data-count]')];
+    const setTxt = (el, v) => { const n = el.firstChild; const t = el.dataset.pre + v + el.dataset.suf; if (n && n.nodeType === 3) n.nodeValue = t; else el.textContent = t; };
+    els.forEach(el => setTxt(el, 0));
+    const io = this.obs((entries) => {
+      if (!entries.some(e => e.isIntersecting)) return;
+      io.disconnect();
+      const t0 = performance.now(), dur = 1600;
+      const step = (now) => {
+        const p = Math.min(1, (now - t0) / dur), k = 1 - Math.pow(1 - p, 3);
+        els.forEach(el => setTxt(el, Math.round(+el.dataset.count * k)));
+        if (p < 1) setTimeout(() => step(performance.now()), 16);
+      };
+      step(performance.now());
+    }, { threshold: 0.4 });
+    io.observe(wrap);
+  }
+  setupSeq() {
+    if (this.reduced || !('IntersectionObserver' in window)) return;
+    const ease = 'cubic-bezier(.22,1,.36,1)';
+    document.querySelectorAll('[data-seq]').forEach(box => {
+      const steps = box.querySelectorAll('[data-seq-step]'), lines = box.querySelectorAll('[data-seq-line]');
+      steps.forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(16px)'; });
+      lines.forEach(el => { el.style.transform = el.dataset.axis === 'y' ? 'scaleY(0)' : 'scaleX(0)'; });
+      const io = this.obs((entries) => {
+        if (!entries[0].isIntersecting) return;
+        io.disconnect();
+        steps.forEach(el => {
+          el.style.transition = `opacity .5s ${ease} ${el.dataset.delay}ms, transform .5s ${ease} ${el.dataset.delay}ms`;
+          el.style.opacity = '1'; el.style.transform = 'none';
+        });
+        lines.forEach(el => {
+          el.style.transition = `transform .6s ${ease} ${el.dataset.delay}ms`;
+          el.style.transform = 'none';
+        });
+      }, { threshold: 0.3 });
+      io.observe(box);
+    });
+  }
+  setupTilt() {
+    if (this.reduced || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    document.querySelectorAll('[data-tilt]').forEach(el => {
+      el.addEventListener('mousemove', e => {
+        const r = el.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
+        el.style.transform = `perspective(900px) rotateX(${(-py * 8).toFixed(2)}deg) rotateY(${(px * 8).toFixed(2)}deg) translateY(-3px)`;
+      });
+      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+    });
+  }
+  setupDrag() {
+    document.querySelectorAll('[data-drag]').forEach(el => {
+      let down = false, sx = 0, sl = 0, moved = false;
+      el.addEventListener('pointerdown', e => {
+        if (e.pointerType !== 'mouse') return;
+        down = true; moved = false; sx = e.clientX; sl = el.scrollLeft;
+        el.style.scrollSnapType = 'none'; el.style.cursor = 'grabbing'; e.preventDefault();
+      });
+      window.addEventListener('pointermove', e => {
+        if (!down) return;
+        const dx = e.clientX - sx; if (Math.abs(dx) > 5) moved = true;
+        el.scrollLeft = sl - dx;
+      });
+      window.addEventListener('pointerup', () => {
+        if (!down) return; down = false; el.style.cursor = ''; el.style.scrollSnapType = 'x mandatory';
+      });
+      el.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+    });
+  }
+  setupMarquee() {
+    const el = this.marqueeRef.current;
+    if (!el || this.reduced || !el.animate) return;
+    this.anim = el.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(calc(-25% - 4px))' }], { duration: 40000, iterations: Infinity });
+    this.marqueeVis = false; this.anim.pause();
+    const sync = () => { if (this.marqueeVis && !document.hidden && !this.marqueeHover) this.anim.play(); else this.anim.pause(); };
+    el.addEventListener('mouseenter', () => { this.marqueeHover = true; sync(); });
+    el.addEventListener('mouseleave', () => { this.marqueeHover = false; sync(); });
+    this.syncMarquee = sync;
+    if (this.marqueeWrapRef.current) this.obs(es => { this.marqueeVis = es[0].isIntersecting; sync(); }).observe(this.marqueeWrapRef.current);
+  }
+  // Videos del hero: se pausan fuera de pantalla, con la pestaña oculta y con prefers-reduced-motion (queda el primer cuadro)
+  attachVids() { // el src se asigna por JS (data-src) para que el navegador no pida la plantilla sin resolver
+    let n = 0;
+    document.querySelectorAll('[data-hero-video]').forEach(v => { const u = v.getAttribute('data-src'); if (u && v.getAttribute('src') !== u) { v.setAttribute('src', u); n++; } });
+    if (n) this.syncVids();
+  }
+  syncVids() {
+    document.querySelectorAll('[data-hero-video]:not([src])').forEach(v => { const u = v.getAttribute('data-src'); if (u) v.setAttribute('src', u); });
+    document.querySelectorAll('[data-hero-video]').forEach(v => {
+      v.muted = true; v.defaultMuted = true; v.loop = true; v.playsInline = true;
+      if (this.reduced || !this.heroVis || document.hidden) { v.pause(); if (this.reduced && v.currentTime === 0) { try { v.currentTime = 0.1; } catch (e) {} } }
+      else { const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+    });
+  }
+  setupWatchers() {
+    this.heroReady = true; this.attachVids();
+    this.onVis = () => { this.syncMarquee && this.syncMarquee(); this.syncVids(); };
+    document.addEventListener('visibilitychange', this.onVis);
+    if (this.heroRef.current) this.obs(es => {
+      const e = es[0]; this.heroVis = e.isIntersecting; this.syncVids();
+      const out = !e.isIntersecting && e.boundingClientRect.top < 0;
+      if (out !== this.state.heroOut) this.setState({ heroOut: out });
+    }, { threshold: 0 }).observe(this.heroRef.current);
+    if (this.ctaRef.current) this.obs(es => {
+      const v = es[0].isIntersecting;
+      if (v !== this.state.ctaIn) this.setState({ ctaIn: v });
+    }, { threshold: 0 }).observe(this.ctaRef.current);
+  }
+  scroll(ref, dir) {
+    const el = ref.current; if (!el) return;
+    el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: this.reduced ? 'auto' : 'smooth' });
+  }
+  link(origen, msg) { return { href: wa(msg), onClick: () => trackWhatsAppClick(origen) }; }
+
+  renderVals() {
+    const { w, tick, zona, faq, menuOpen, heroOut, ctaIn, planModal } = this.state;
+    const planList = this.planList();
+    const mp = planModal >= 0 ? planList[planModal] : null;
+    const navDesk = w >= 900, heroDesk = w >= 1240, mob = w < 768;
+    // Tarjetas rotativas: ciclo de 8 s (texto ~5 s, medio ~3 s). B entra 2 s antes que A. Sin rotación con reduced-motion (tick no avanza).
+    const rotA = tick % 8 >= 5 ? 1 : 0, rotB = (tick + 2) % 8 >= 5 ? 1 : 0;
+    const heroMedia = k => { const src = ASSETS[k] || '', vid = /\.mp4($|\?)/i.test(src); return { src, isVideo: vid, isImg: !!src && !vid, empty: !src, bg: src && !vid ? `url("${src}") center/cover no-repeat` : '' }; };
+    const M = { heroFamilia: heroMedia('heroFamilia'), heroPareja: heroMedia('heroPareja'), heroMascota: heroMedia('heroMascota'), heroCuidados: heroMedia('heroCuidados') };
+    const barOn = mob && heroOut && !ctaIn;
+    const t = (o) => () => trackWhatsAppClick(o);
+    const on = '#10A6A4', off = '#D9F1F0';
+
+    return {
+      M, rotA, rotB,
+      navDesk, navMob: !navDesk, heroDesk, heroMob: !heroDesk, stepsH: !mob, stepsV: mob,
+      heroTitle: HERO_TITLE, heroWords: HERO_TITLE.split(' '),
+      menuOpen: menuOpen && !navDesk, menuExpanded: menuOpen ? 'true' : 'false',
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      waGeneral: wa(MSG_GENERAL), igUrl: INSTAGRAM_URL, waDisplay: WHATSAPP_DISPLAY, waHours: WHATSAPP_HOURS,
+      waCartilla: wa('Hola, quiero recibir la cartilla completa de prestadores de Premedic.'),
+      waDep: wa(MSG_ASOCIARTE.dep), waMono: wa(MSG_ASOCIARTE.mono), waAuto: wa(MSG_ASOCIARTE.auto), waEmp: wa(MSG_ASOCIARTE.emp),
+      trkDep: t('asociarte_dependencia'), trkMono: t('asociarte_monotributo'), trkAuto: t('asociarte_autonomo'), trkEmp: t('asociarte_empresas'),
+      trkHeader: t('header'), trkMenu: t('menu_movil'), trkHero: t('hero'), trkHero2: t('hero_secundario'), trkBar: t('barra_contacto'),
+      trkPasos: t('pasos'), trkCta: t('cta_final'), trkCta2: t('cta_final_secundario'), trkFooter: t('footer'),
+      trkFloat: t('flotante'), trkMobBar: t('barra_inferior_movil'), trkCartilla: t('prestadores_cartilla'),
+      heroRef: this.heroRef, ctaRef: this.ctaRef,
+      destRef: this.destRef, planRef: this.planRef, benRef: this.benRef, marqueeRef: this.marqueeRef, marqueeWrapRef: this.marqueeWrapRef,
+      destPrev: () => this.scroll(this.destRef, -1), destNext: () => this.scroll(this.destRef, 1),
+      planPrev: () => this.scroll(this.planRef, -1), planNext: () => this.scroll(this.planRef, 1),
+      benPrev: () => this.scroll(this.benRef, -1), benNext: () => this.scroll(this.benRef, 1),
+      cifras: CIFRAS.map(c => ({ ...c, text: c.pre + c.value + c.suf })),
+      destacados: DESTACADOS.map(d => ({ ...d, bg: ASSET_BG[d.asset], label: ASSET_LABEL[d.asset], ...this.link('destacado_' + d.asset, `Hola, quiero saber más sobre ${d.key} de Premedic.`) })),
+      hasPlanModal: !!mp,
+      closePlanModal: () => this.closePlanModal(),
+      onOverlayClick: e => { if (e.target === e.currentTarget) this.closePlanModal(); },
+      modalPlan: mp ? {
+        name: mp.name, resumen: mp.resumen || mp.sub, detalle: mp.detalle || mp.points,
+        hasInherit: !!mp.inherit, inheritText: mp.inherit ? `Incluye todo lo del ${mp.inherit}, y además:` : '',
+        nota: mp.nota || NOTA_PLANES, hasNota: true,
+        ...this.link('plan_modal_' + mp.name, mp.msg),
+      } : { name: '', resumen: '', detalle: [], hasInherit: false, inheritText: '', nota: '', hasNota: false, href: '#', onClick: () => {} },
+      planes: planList.map((p, pi) => ({
+        ...p, canDetail: !p.soon, openModal: e => this.openPlanModal(pi, e), bg: ASSET_BG[p.asset], label: ASSET_LABEL[p.asset], hot: !!p.hot, soon: !!p.soon, hasLevel: !!p.level, hasInherit: !!p.inherit,
+        inherit: p.inherit ? `Incluye todo lo del ${p.inherit}, y además:` : '',
+        levelLabel: `Nivel de cobertura ${p.level} de 4`,
+        b1: p.level >= 1 ? on : off, b2: p.level >= 2 ? on : off, b3: p.level >= 3 ? on : off, b4: p.level >= 4 ? on : off,
+        ...this.link('plan_' + p.name, p.msg),
+      })),
+      pasos: PASOS.map((s, i) => ({ ...s, n: i + 1, delay: [0, 650, 1300][i], lineDelay: [250, 900, 0][i], notLast: i < PASOS.length - 1 })),
+      beneficios: BENEFICIOS.map(b => {
+        const isFarmacia = b.asset === 'benFarmacias' && !ASSETS.benFarmacias;
+        const ill = isFarmacia
+          ? 'linear-gradient(135deg,#10A6A4 0%,#077B7A 100%)'
+          : ASSET_BG[b.asset] + (b.violet ? 'repeating-linear-gradient(135deg,#ECE6FA 0 10px,#F4F0FC 10px 20px)' : 'repeating-linear-gradient(135deg,#E3F4F3 0 10px,#EFF8F8 10px 20px)');
+        return {
+          ...b,
+          label: isFarmacia ? '' : ASSET_LABEL[b.asset],
+          hasLabel: !isFarmacia && !!ASSET_LABEL[b.asset],
+          isCross: isFarmacia,
+          ill,
+          btnBg: b.violet ? '#ECE6FA' : '#D9F1F0', ink: b.violet ? '#5B3FA6' : '#077B7A',
+          ...this.link('beneficio_' + b.title, `Hola, quiero saber más sobre ${b.title} de Premedic.`),
+        };
+      }),
+      marquee: [0, 1, 2, 3].flatMap(() => PRESTADORES_LOGOS).map(p => ({ name: p.name, src: ASSETS[p.asset] || '', bg: ASSETS[p.asset] ? `url("${ASSETS[p.asset]}") center/contain no-repeat` : 'none', hasSrc: !!ASSETS[p.asset], noSrc: !ASSETS[p.asset], file: SHOW_PLACEHOLDER_LABELS && !ASSETS[p.asset] ? ASSET_LABEL[p.asset] : '' })),
+      zonas: ZONA_TABS.map(z => ({
+        label: z, selected: z === zona ? 'true' : 'false',
+        bg: z === zona ? '#10A6A4' : '#FFFFFF', color: z === zona ? '#FFFFFF' : '#077B7A', bd: z === zona ? '#10A6A4' : '#EBEBEB',
+        onClick: () => this.setState({ zona: z }),
+      })),
+      zonaItems: PRESTADORES_CABA, isCaba: zona === 'CABA', notCaba: zona !== 'CABA', waZona: wa(`Hola, quiero recibir la cartilla de prestadores de Premedic para ${ZONA_NOMBRE[zona]}.`), trkZona: t('prestadores_' + zona),
+      faqs: FAQS.map((f, i) => ({
+        ...f, expanded: faq === i ? 'true' : 'false', rows: faq === i ? '1fr' : '0fr', rot: faq === i ? '45deg' : '0deg',
+        onClick: () => this.setState(s => ({ faq: s.faq === i ? -1 : i })),
+      })),
+      A: ASSET_BG, L: ASSET_LABEL, hasLogo: !!ASSETS.logo, noLogo: !ASSETS.logo, logoSrc: ASSETS.logo, logoHeaderH: mob ? '36px' : '44px', logoFooterH: mob ? '44px' : '56px', showPlaceholderLabels: SHOW_PLACEHOLDER_LABELS, loaderLogoBg: ASSETS.logo ? `url("${ASSETS.logo}") center/contain no-repeat` : 'none', logoBg: ASSETS.logo ? `url("${ASSETS.logo}") left center/contain no-repeat` : 'none', footerPb: mob ? 'calc(120px + env(safe-area-inset-bottom))' : '56px', agencia: AGENCIA_DATOS, rnemp: RNEMP, privacyUrl: PRIVACY_URL,
+      mobBar: mob, showFloatWa: !mob,
+      floatBottom: '16px',
+      barOp: barOn ? 1 : 0, barTf: barOn ? 'translateY(0)' : 'translateY(16px)', barPe: barOn ? 'auto' : 'none', barTab: barOn ? 0 : -1,
+    };
+  }
+}
+</script>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><style>@keyframes pmPulse{0%,100%{opacity:1}50%{opacity:.45}}.pmw{animation:pmPulse 1.2s ease-in-out infinite}@media (prefers-reduced-motion: reduce){.pmw{animation:none}}#__bundler_loading{display:none !important}body{background:#EFF8F8 !important}</style><rect width="100%" height="100%" fill="#EFF8F8"/><text class="pmw" x="50%" y="50%" text-anchor="middle" dominant-baseline="central" font-family="Satoshi,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif" font-size="44" font-weight="700" letter-spacing="-1.5" fill="#10A6A4">premedic</text></svg></template>
+</body>
+</html>
