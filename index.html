@@ -962,15 +962,16 @@ class Component extends DCLogic {
   // ===== Ciclo de vida =====
   componentDidMount() {
     document.documentElement.lang = 'es-AR';
+    // Primero: así un error posterior no deja la pantalla de carga puesta. (Las animaciones corren recién cuando se oculta.)
+    this.whenReady(() => {
+      this.setupWords(); this.setupReveal(); this.setupCounters(); this.setupSeq(); this.setupTilt();
+    });
     this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     this.onResize = () => this.setState({ w: window.innerWidth });
     window.addEventListener('resize', this.onResize);
     this.setupModalKeys();
     this.setupHeroRotation();
     setTimeout(() => { this.setupDrag(); this.setupMarquee(); this.setupWatchers(); this.setupPlanScroll(); }, 60);
-    this.whenReady(() => {
-      this.setupWords(); this.setupReveal(); this.setupCounters(); this.setupSeq(); this.setupTilt();
-    });
   }
   // Espera la tipografía (máx. 1,5 s) y un mínimo de 350 ms; oculta la pantalla de carga y recién ahí arrancan las animaciones de entrada.
   whenReady(cb) {
@@ -996,9 +997,11 @@ class Component extends DCLogic {
     (this.observers || []).forEach(o => o.disconnect());
     this.anim && this.anim.cancel();
   }
-  componentDidUpdate(_, prev) {
+  componentDidUpdate() {
     if (this.heroReady) this.attachVids();
-    const open = this.state.planModal >= 0, was = prev.planModal >= 0;
+    // El runtime de Claude Design no pasa el estado anterior: se guarda a mano.
+    const open = this.state.planModal >= 0, was = (this.prevPlanModal === undefined ? -1 : this.prevPlanModal) >= 0;
+    this.prevPlanModal = this.state.planModal;
     if (open === was) return;
     document.body.style.overflow = open ? 'hidden' : '';
     if (open) {
