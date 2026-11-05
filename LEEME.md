@@ -39,7 +39,6 @@ La página necesita internet para dos cosas: la tipografía (Fontshare) y el mot
 | `assets/agency/` | Logo de Grupo Amro y sello de 12 años (footer). | Sí |
 | `LEEME.md` | Esta guía. | Sí |
 | `serve.js`, `package.json` | Servidor de prueba viejo (apunta a un archivo que ya no existe). **No se usan**; usá el comando de Python de arriba. | No |
-| `export/` | Copia vieja y autónoma de la página, anterior a los últimos cambios. **No se usa** y está desactualizada. | No |
 
 ### Cómo está ordenado `index.html`
 
@@ -89,7 +88,7 @@ Después de cada cambio: guardá, recargá el navegador (`Ctrl + F5`) y revisá 
 
 ## Cómo publicar
 
-El sitio no necesita compilar nada: se publica tal cual. Hay que subir **`index.html`, `support.js` y la carpeta `assets/`** (no hace falta `serve.js`, `package.json` ni `export/`).
+El sitio no necesita compilar nada: se publica tal cual. Hay que subir **`index.html`, `support.js` y la carpeta `assets/`** (no hace falta `serve.js` ni `package.json`).
 
 ### Opción A — GitHub Pages (gratis)
 
