@@ -121,6 +121,26 @@ section[id]{scroll-margin-top:84px}
 @keyframes pmScaleIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
 @keyframes pmSlideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 @media (prefers-reduced-motion: reduce){.pm-modal-overlay,.pm-modal-card{animation:none !important}}
+/* ===== HERO EN CELULAR Y TABLET (< 1240 px) =====
+   EDITAR: tamaños de letra (.hm-title / .hm-sub), separaciones (margin) y alto de las tarjetas (.hm-card height). */
+.hm{max-width:560px;margin:0 auto;padding-top:12px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.hm-title{margin:0;font-size:clamp(44px,13.3vw,64px);line-height:.9;font-weight:500;letter-spacing:-0.035em;color:var(--c-primary-dark);display:flex;flex-wrap:wrap;justify-content:center;column-gap:.24em}
+.hm-sub{margin:24px 0 0;max-width:22em;font-size:clamp(17px,4.6vw,20px);line-height:1.5;font-weight:500;color:var(--c-muted);text-wrap:balance}
+.hm-cta{margin-top:28px;width:100%;display:flex;justify-content:center;background:var(--c-primary);color:#FFFFFF;font-weight:700;font-size:18px;padding:16px 26px;border-radius:15px;text-decoration:none}
+/* Tarjetas de video/imagen: 2 filas de 2, siempre video o imagen (sin tarjetas de texto). Las de arriba llegan a los bordes de la pantalla. */
+.hm-grid{width:min(100vw,720px);margin-top:40px;display:flex;flex-wrap:wrap;gap:16px;text-align:left}
+.hm-card{position:relative;overflow:hidden;width:calc(50% - 8px);height:clamp(130px,38.5vw,200px);background:var(--c-tint);border-radius:20px}
+.hm-card:nth-child(1){border-radius:0 20px 20px 0}
+.hm-card:nth-child(2){border-radius:20px 0 0 20px}
+.hm-card:nth-child(3){margin-left:5.4vw;width:calc(50% - 8px - 5.4vw)}
+.hm-card:nth-child(4){margin-right:5.4vw;width:calc(50% - 8px - 5.4vw)}
+.hm-el{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.hm-ph{background:repeating-linear-gradient(135deg,#CFEAE9 0 10px,#DDF1F0 10px 20px)}
+@media (min-width:600px){
+  .hm-card,.hm-card:nth-child(1),.hm-card:nth-child(2){border-radius:20px}
+  .hm-card:nth-child(1),.hm-card:nth-child(4){margin:0}
+  .hm-card:nth-child(3),.hm-card:nth-child(4){margin:0;width:calc(50% - 8px)}
+}
 /* ===== Marquesina de prestadores: logos sueltos, sin caja ===== */
 .pm-marq-wrap{position:relative;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .pm-marq{display:flex;align-items:center;gap:56px;width:max-content;padding:4px 0}
@@ -217,21 +237,21 @@ section[id]{scroll-margin-top:84px}
       </div>
     </sc-if>
     <sc-if value="{{ heroMob }}" hint-placeholder-val="{{ false }}">
-      <div style="max-width:560px;margin:0 auto;padding-top:28px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px">
-        <h1 aria-label="{{ heroTitle }}" style="margin:0;font-size:clamp(40px,7vw,60px);line-height:.92;font-weight:500;letter-spacing:-0.035em;color:var(--c-primary-dark);display:flex;flex-wrap:wrap;justify-content:center;column-gap:.24em">
+      <div class="hm">
+        <h1 class="hm-title" aria-label="{{ heroTitle }}">
           <sc-for list="{{ heroWords }}" as="hw" hint-placeholder-count="5"><span data-word="" aria-hidden="true" style="display:inline-block">{{ hw }}</span></sc-for>
         </h1>
-        <p data-reveal="" style="margin:0;font-size:17px;line-height:1.45;color:var(--c-muted);text-wrap:pretty">Cambiá tu obra social y accedé a una cobertura médica con amplia red de clínicas y centros propios, para vos y tu familia.</p>
-        <a href="{{ waGeneral }}" target="_blank" rel="noopener" onClick="{{ trkHero }}" style="width:100%;display:flex;justify-content:center;background:var(--c-primary);color:#FFFFFF;font-weight:700;font-size:18px;padding:16px 26px;border-radius:15px;text-decoration:none">Quiero asesoramiento</a>
-        <div style="width:100%;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;text-align:left">
-          <div style="display:flex;flex-direction:column;gap:12px;">
-            <div data-reveal="" style="position:relative;height:150px;border-radius:18px;overflow:hidden;border:1px solid var(--c-line);background:var(--c-tint);margin-left:-12px"><sc-if value="{{ M.heroFamilia.isVideo }}" hint-placeholder-val="{{ false }}"><video data-hero-video="" data-src="{{ M.heroFamilia.src }}" muted="" loop="" autoplay="" playsinline="" preload="metadata" aria-hidden="true" tabindex="-1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video></sc-if><sc-if value="{{ M.heroFamilia.isImg }}" hint-placeholder-val="{{ false }}"><div role="img" aria-hidden="true" style="position:absolute;inset:0;background:{{ M.heroFamilia.bg }}"></div></sc-if><sc-if value="{{ M.heroFamilia.empty }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#CFEAE9 0 10px,#DDF1F0 10px 20px)"></div></sc-if></div>
-            <div data-reveal="" style="position:relative;height:125px;border-radius:18px;overflow:hidden;border:1px solid var(--c-line);background:#FFFFFF"><div style="position:absolute;inset:0;background:#FFFFFF;padding:12px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5l8-3z" fill="#10A6A4"/><path d="M12 8v6M9 11h6" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/></svg><span style="font-size:15px;line-height:1.1;font-weight:500;color:var(--c-primary-dark)">El mejor<br><span style="color:#6BB7B6">de los cuidados</span></span></div><div style="position:absolute;inset:0;transition:opacity .45s ease;opacity:{{ rotB }}"><sc-if value="{{ M.heroCuidados.isVideo }}" hint-placeholder-val="{{ false }}"><video data-hero-video="" data-src="{{ M.heroCuidados.src }}" muted="" loop="" autoplay="" playsinline="" preload="metadata" aria-hidden="true" tabindex="-1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video></sc-if><sc-if value="{{ M.heroCuidados.isImg }}" hint-placeholder-val="{{ false }}"><div role="img" aria-hidden="true" style="position:absolute;inset:0;background:{{ M.heroCuidados.bg }}"></div></sc-if><sc-if value="{{ M.heroCuidados.empty }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#CFEAE9 0 10px,#DDF1F0 10px 20px)"></div></sc-if></div></div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:12px;margin-top:32px">
-            <div data-reveal="" style="position:relative;height:135px;border-radius:18px;overflow:hidden;border:1px solid var(--c-line);background:#FFFFFF"><div style="position:absolute;inset:0;background:#FFFFFF;padding:12px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="#10A6A4" aria-hidden="true"><ellipse cx="5.5" cy="11" rx="2" ry="2.8"/><ellipse cx="9.5" cy="6" rx="2" ry="2.8"/><ellipse cx="14.5" cy="6" rx="2" ry="2.8"/><ellipse cx="18.5" cy="11" rx="2" ry="2.8"/><path d="M12 11.5c-3 0-6 3.4-6 6.2 0 2 1.6 2.8 3 2.8 1.2 0 2-.5 3-.5s1.8.5 3 .5c1.4 0 3-.8 3-2.8 0-2.8-3-6.2-6-6.2z"/></svg><span style="font-size:15px;line-height:1.1;font-weight:500;color:var(--c-primary-dark)">Amar Mascotas<br><span style="color:#6BB7B6">Veterinaria a domicilio</span></span></div><div style="position:absolute;inset:0;transition:opacity .45s ease;opacity:{{ rotA }}"><sc-if value="{{ M.heroMascota.isVideo }}" hint-placeholder-val="{{ false }}"><video data-hero-video="" data-src="{{ M.heroMascota.src }}" muted="" loop="" autoplay="" playsinline="" preload="metadata" aria-hidden="true" tabindex="-1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video></sc-if><sc-if value="{{ M.heroMascota.isImg }}" hint-placeholder-val="{{ false }}"><div role="img" aria-hidden="true" style="position:absolute;inset:0;background:{{ M.heroMascota.bg }}"></div></sc-if><sc-if value="{{ M.heroMascota.empty }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#CFEAE9 0 10px,#DDF1F0 10px 20px)"></div></sc-if></div></div>
-            <div data-reveal="" style="position:relative;height:150px;border-radius:18px;overflow:hidden;border:1px solid var(--c-line);background:var(--c-tint);margin-right:-12px"><sc-if value="{{ M.heroPareja.isVideo }}" hint-placeholder-val="{{ false }}"><video data-hero-video="" data-src="{{ M.heroPareja.src }}" muted="" loop="" autoplay="" playsinline="" preload="metadata" aria-hidden="true" tabindex="-1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video></sc-if><sc-if value="{{ M.heroPareja.isImg }}" hint-placeholder-val="{{ false }}"><div role="img" aria-hidden="true" style="position:absolute;inset:0;background:{{ M.heroPareja.bg }}"></div></sc-if><sc-if value="{{ M.heroPareja.empty }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#CFEAE9 0 10px,#DDF1F0 10px 20px)"></div></sc-if></div>
-          </div>
+        <p data-reveal="" class="hm-sub">{{ heroSubMob }}</p>
+        <a href="{{ waGeneral }}" target="_blank" rel="noopener" onClick="{{ trkHero }}" class="hm-cta">Quiero asesoramiento</a>
+        <!-- Tarjetas: siempre video o imagen. El orden y qué archivo va en cada una se cambia en renderVals (heroCards) y en ASSETS. -->
+        <div class="hm-grid">
+          <sc-for list="{{ heroCards }}" as="c" hint-placeholder-count="4">
+            <div data-reveal="" class="hm-card">
+              <sc-if value="{{ c.isVideo }}" hint-placeholder-val="{{ false }}"><video data-hero-video="" data-src="{{ c.src }}" muted="" loop="" autoplay="" playsinline="" preload="metadata" aria-hidden="true" tabindex="-1" class="hm-el"></video></sc-if>
+              <sc-if value="{{ c.isImg }}" hint-placeholder-val="{{ false }}"><div role="img" aria-hidden="true" class="hm-el" style="background:{{ c.bg }}"></div></sc-if>
+              <sc-if value="{{ c.empty }}" hint-placeholder-val="{{ true }}"><div class="hm-el hm-ph"></div></sc-if>
+            </div>
+          </sc-for>
         </div>
       </div>
     </sc-if>
@@ -725,6 +745,8 @@ const ASSETS = {
 
 // EDITAR: título principal del hero
 const HERO_TITLE = 'El respaldo que te merecés'; // [CONFIRMAR]
+// EDITAR: texto corto debajo del título, solo en celular y tablet (en computadora se usa el texto largo que está escrito en el HTML del hero)
+const HERO_SUB_MOB = 'Cambiá tu obra social y accedé a una amplia red de clínicas y centros propios.'; // [CONFIRMAR]
 
 // ----- Planes (escalera). Niveles y herencia: [CONFIRMAR] -----
 // EDITAR: para AGREGAR un plan copiá un bloque { ... } completo; para SACARLO borralo. El orden de la lista es el orden en pantalla.
@@ -999,6 +1021,10 @@ class Component extends DCLogic {
   }
   componentDidUpdate() {
     if (this.heroReady) this.attachVids();
+    // El hero cambia de diseño al cruzar 1240 px y sus elementos nuevos nacen ocultos (CSS del head): se muestran a mano.
+    const heroDesk = this.state.w >= 1240;
+    if (this.prevHeroDesk !== undefined && this.prevHeroDesk !== heroDesk) this.showHeroNow();
+    this.prevHeroDesk = heroDesk;
     // El runtime de Claude Design no pasa el estado anterior: se guarda a mano.
     const open = this.state.planModal >= 0, was = (this.prevPlanModal === undefined ? -1 : this.prevPlanModal) >= 0;
     this.prevPlanModal = this.state.planModal;
@@ -1041,7 +1067,7 @@ class Component extends DCLogic {
   // Hero: cada 1 s sube "tick" para rotar las tarjetas con video (solo con el hero visible y sin reduced-motion).
   setupHeroRotation() {
     if (!this.reduced) this.timer = setInterval(() => {
-      if (this.heroVis && !document.hidden) this.setState(s => ({ tick: s.tick + 1 }));
+      if (this.heroVis && !document.hidden && window.innerWidth >= 1240) this.setState(s => ({ tick: s.tick + 1 }));
     }, 1000);
   }
   // Título del hero: las palabras entran una por una (el estado inicial oculto sale del CSS del head).
@@ -1053,6 +1079,10 @@ class Component extends DCLogic {
       el.style.transition = `opacity .5s cubic-bezier(.22,1,.36,1) ${d}ms, transform .5s cubic-bezier(.22,1,.36,1) ${d}ms`;
       el.style.opacity = '1'; el.style.transform = 'none';
     }), 40);
+  }
+  showHeroNow() {
+    const root = this.heroRef.current; if (!root) return;
+    root.querySelectorAll('[data-word],[data-reveal]').forEach(el => { el.style.transition = 'opacity .4s ease'; el.style.opacity = '1'; el.style.transform = 'none'; });
   }
   // Entrada al hacer scroll: cada [data-reveal] aparece con un fade y un pequeño desplazamiento.
   setupReveal() {
@@ -1246,7 +1276,9 @@ class Component extends DCLogic {
     return {
       M, rotA, rotB,
       navDesk, navMob: !navDesk, heroDesk, heroMob: !heroDesk, stepsH: !mob, stepsV: mob,
-      heroTitle: HERO_TITLE, heroWords: HERO_TITLE.split(' '),
+      heroTitle: HERO_TITLE, heroWords: HERO_TITLE.split(' '), heroSubMob: HERO_SUB_MOB,
+      // Celular: orden de las 4 tarjetas (fila 1: familia y pareja · fila 2: cuidados y mascota). Todas son video o imagen.
+      heroCards: [M.heroFamilia, M.heroPareja, M.heroCuidados, M.heroMascota],
       menuOpen: menuOpen && !navDesk, menuExpanded: menuOpen ? 'true' : 'false',
       toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
       closeMenu: () => this.setState({ menuOpen: false }),
